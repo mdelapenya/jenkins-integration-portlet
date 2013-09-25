@@ -14,7 +14,7 @@
 
 		<div id="mychart"></div>
 
-		<aui:script use="charts">
+		<aui:script use="charts-legend">
 			var myDataValues = [
 				<%
 				for (int i = testResults.length() -1; i >= 0; i--) {
@@ -27,7 +27,7 @@
 
 					int totalCount = passCount + skipCount + failCount;
 
-					String line = "{category:'" + category.getInt(0) + "', Passed:" + passCount + ", Failed:" + failCount + ", Skipped:" + skipCount + ", Total:" + totalCount + "}";
+					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount + ", Failed:" + failCount + ", Skipped:" + skipCount + ", Total:" + totalCount + "}";
 
 					if (i > 0) {
 						line += ",";
@@ -39,7 +39,17 @@
 			];
 
 			var mychart = new A.Chart({
+				categoryKey: "build",
 				dataProvider: myDataValues,
+				legend: {
+					position: "right",
+					width: 300,
+					height: 300,
+					styles: {
+						hAlign: "center",
+						hSpacing: 4
+					}
+				},
 				render: "#mychart"
 			});
 		</aui:script>
