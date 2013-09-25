@@ -6,6 +6,7 @@
 	<portlet>
 		<portlet-name>jenkinsconsumerportlet</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.liferay.ci.jenkins.action.ConfigurationActionImpl</configuration-action-class>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>

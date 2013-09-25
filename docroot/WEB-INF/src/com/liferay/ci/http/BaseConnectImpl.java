@@ -47,6 +47,11 @@ public class BaseConnectImpl {
 		return uc.getInputStream();
 	}
 
+	protected void setAuthConfiguration(String newUser, String newPassword) {
+		user = newUser;
+		password = newPassword;
+	}
+
 	private static String user;
 	private static String password;
 

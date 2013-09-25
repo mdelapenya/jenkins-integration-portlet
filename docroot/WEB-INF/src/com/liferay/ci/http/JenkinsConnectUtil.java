@@ -40,6 +40,12 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
+	public static void setAuthConfiguration(String user, String password)
+		throws IOException {
+
+		getService().setAuthConfiguration(user, password);
+	}
+
 	private JenkinsConnectUtil() {
 	}
 
