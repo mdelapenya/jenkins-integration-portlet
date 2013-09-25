@@ -48,7 +48,7 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 				_log.error("The job was not available", ioe);
 			}
 			catch (JSONException e) {
-				
+				_log.error("The job is not well-formed", e);
 			}
 		}
 
