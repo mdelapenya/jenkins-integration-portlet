@@ -6,13 +6,13 @@
 	if (testResults != null) {
 %>
 		<style>
-			#mychart {
+			#chartbox {
 				width: 600px;
 				height: 400px;
 			}
 		</style>
 
-		<div id="mychart"></div>
+		<div id="chartbox"></div>
 
 		<aui:script use="charts-legend">
 			var myDataValues = [
@@ -38,7 +38,7 @@
 				%>
 			];
 
-			var mychart = new A.Chart({
+			var chartbox = new A.Chart({
 				categoryKey: "build",
 				dataProvider: myDataValues,
 				legend: {
@@ -50,7 +50,7 @@
 						hSpacing: 4
 					}
 				},
-				render: "#mychart"
+				render: "#chartbox"
 			});
 		</aui:script>
 <%
