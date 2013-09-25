@@ -31,7 +31,7 @@ public class JenkinsConnectUtil {
 				result.put(testReport);
 			}
 			catch(FileNotFoundException fnfe) {
-				_log.error(
+				_log.warn(
 					"The build " + build.getInt("number") + " is not present",
 					fnfe);
 			}
