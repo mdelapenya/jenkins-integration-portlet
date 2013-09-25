@@ -40,7 +40,7 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 			try {
 				JSONArray testResults = JenkinsConnectUtil.getBuilds(jobName);
 
-				_log.debug("Got it!");
+				_log.debug("Caching test result");
 
 				_jsonCache.put(jobName, testResults);
 			}
