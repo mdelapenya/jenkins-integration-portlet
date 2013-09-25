@@ -1,0 +1,48 @@
+<%@ include file="/html/init.jsp" %>
+
+<%
+	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
+
+	if (testResults != null) {
+%>
+		<style>
+			#mychart {
+				width: 600px;
+				height: 400px;
+			}
+		</style>
+
+		<div id="mychart"></div>
+
+		<aui:script use="charts">
+			var myDataValues = [
+				<%
+				for (int i = testResults.length() -1; i >= 0; i--) {
+					JSONObject testResult = (JSONObject)testResults.get(i);
+
+					JSONArray category = (JSONArray)testResult.get("buildNumber");
+					int passCount = testResult.getInt("passCount");
+					int skipCount = testResult.getInt("skipCount");
+					int failCount = testResult.getInt("failCount");
+
+					int totalCount = passCount + skipCount + failCount;
+
+					String line = "{category:'" + category.getInt(0) + "', Passed:" + passCount + ", Failed:" + failCount + ", Skipped:" + skipCount + ", Total:" + totalCount + "}";
+
+					if (i > 0) {
+						line += ",";
+					}
+
+					out.println(line);
+				}
+				%>
+			];
+
+			var mychart = new A.Chart({
+				dataProvider: myDataValues,
+				render: "#mychart"
+			});
+		</aui:script>
+<%
+	}
+%>

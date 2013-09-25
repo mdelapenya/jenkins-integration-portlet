@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+
+<project name="jenkins-consumer-portlet" basedir="." default="deploy">
+	<import file="/home/manuel/liferay-workspace/trunk/plugins/portlets/build-common-portlet.xml" />
+</project>
