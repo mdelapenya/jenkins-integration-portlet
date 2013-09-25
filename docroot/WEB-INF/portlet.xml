@@ -16,14 +16,6 @@
 			<name>config-template</name>
 			<value>/html/jenkinsconsumer/config.jsp</value>
 		</init-param>
-		<init-param>
-			<name>basic-auth-username</name>
-			<value></value>
-		</init-param>
-		<init-param>
-			<name>basic-auth-password</name>
-			<value></value>
-		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
