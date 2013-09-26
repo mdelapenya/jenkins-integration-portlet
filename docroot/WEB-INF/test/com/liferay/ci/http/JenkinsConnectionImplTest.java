@@ -11,9 +11,40 @@ public class JenkinsConnectionImplTest {
 	public void testGetBuildsTestReport() throws Exception {
 		String jobName = "mdelapenya";
 
-		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName);
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 0);
 
 		assertThat(testReports).isNotNull();
+		assertThat(testReports.length()).isEqualTo(12);
+	}
+
+	@Test
+	public void testGetBuildsTestReportMaxNumber() throws Exception {
+		String jobName = "mdelapenya";
+
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 100);
+
+		assertThat(testReports).isNotNull();
+		assertThat(testReports.length()).isEqualTo(12);
+	}
+
+	@Test
+	public void testGetBuildsTestReportMaxNumberNegative() throws Exception {
+		String jobName = "mdelapenya";
+
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, -1);
+
+		assertThat(testReports).isNotNull();
+		assertThat(testReports.length()).isEqualTo(12);
+	}
+
+	@Test
+	public void testGetBuildsTestReportMaxNumberLessThan() throws Exception {
+		String jobName = "mdelapenya";
+
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 7);
+
+		assertThat(testReports).isNotNull();
+		assertThat(testReports.length()).isEqualTo(7);
 	}
 
 }
