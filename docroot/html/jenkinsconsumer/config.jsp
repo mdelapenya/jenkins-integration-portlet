@@ -47,10 +47,10 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 		</aui:select>
 
 		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
-			<aui:option selected='<%= buildsNumber == "5" %>' label="5" value="5" />
-			<aui:option selected='<%= buildsNumber == "10" %>' label="10" value="10" />
-			<aui:option selected='<%= buildsNumber == "25" %>' label="25" value="25" />
-			<aui:option selected='<%= buildsNumber == "50" %>' label="50" value="50" />
+			<aui:option selected='<%= buildsNumber.equals("5") %>' label="5" value="5" />
+			<aui:option selected='<%= buildsNumber.equals("10") %>' label="10" value="10" />
+			<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
+			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
 		</aui:select>
 	</aui:fieldset>
 
