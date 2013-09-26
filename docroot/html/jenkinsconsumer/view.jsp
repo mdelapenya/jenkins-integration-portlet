@@ -20,28 +20,25 @@
 <%
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 %>
-<portlet:actionURL name="getBuilds" var="getBuildsURL" />
 
-<aui:form action="<%= getBuildsURL.toString() %>" name="fm">
-	<aui:row>
-		<c:choose>
-			<c:when test="<%= Validator.isNull(jobName) %>">
-				<div class="alert alert-info">
-					<span class="displaying-help-message-holder">
-						<liferay-ui:message key="this-is-the-jenkins-consumer-portlet-portlet-from-you-can-inspect-some-jenkins-statistics" />
-					</span>
-				</div>
+<div>
+	<c:choose>
+		<c:when test="<%= Validator.isNull(jobName) %>">
+			<div class="alert alert-info">
+				<span class="displaying-help-message-holder">
+					<liferay-ui:message key="this-is-the-jenkins-consumer-portlet-portlet-from-you-can-inspect-some-jenkins-statistics" />
+				</span>
+			</div>
 
-				<div class="alert alert-warn">
-					<span class="displaying-help-message-holder">
-						<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
-					</span>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<h2><liferay-ui:message key="test-build-stats-for" /> <%= jobName %></h2>
-				<%@ include file="builds.jspf" %>
-			</c:otherwise>
-		</c:choose>
-	</aui:row>
-</aui:form>
+			<div class="alert alert-warn">
+				<span class="displaying-help-message-holder">
+					<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
+				</span>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<h2><liferay-ui:message key="test-build-stats-for" /> <%= jobName %></h2>
+			<%@ include file="builds.jspf" %>
+		</c:otherwise>
+	</c:choose>
+</div>
