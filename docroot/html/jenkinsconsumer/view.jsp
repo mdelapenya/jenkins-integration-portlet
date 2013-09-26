@@ -22,17 +22,17 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 %>
 <portlet:actionURL name="getBuilds" var="getBuildsURL" />
 
-<div class="alert alert-info">
-	<span class="displaying-help-message-holder">
-		This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
-	</span>
-</div>
-
 <aui:form action="<%= getBuildsURL.toString() %>" name="fm">
 	<aui:row>
 	<%
 	if (Validator.isNull(jobName)) {
 	%>
+		<div class="alert alert-info">
+			<span class="displaying-help-message-holder">
+				This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
+			</span>
+		</div>
+
 		<div class="alert alert-warn">
 			<span class="displaying-help-message-holder">
 				Please configure this portlet to display Jenkins build information.
