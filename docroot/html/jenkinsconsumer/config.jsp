@@ -20,6 +20,7 @@
 String userName = GetterUtil.getString(portletPreferences.getValue("username", null));
 String password = GetterUtil.getString(portletPreferences.getValue("password", null));
 String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnumber", null));
+String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -40,6 +41,11 @@ String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnu
 	</aui:fieldset>
 
 	<aui:fieldset label="builds-view-configuration">
+		<aui:select id="preferences--jobname--" label="job-name" name="preferences--jobname--">
+			<aui:option label="mdelapenya" value="mdelapenya" />
+			<aui:option label="liferay-portal-master-clone" value="liferay-portal-master-clone" />
+		</aui:select>
+
 		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
 			<aui:option selected='<%= buildsNumber == "5" %>' label="5" value="5" />
 			<aui:option selected='<%= buildsNumber == "10" %>' label="10" value="10" />

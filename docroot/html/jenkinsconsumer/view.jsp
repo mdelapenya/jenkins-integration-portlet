@@ -14,30 +14,37 @@
 */
 --%>
 
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@ include file="/html/init.jsp" %>
 
+<%
+String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
+%>
 <portlet:actionURL name="getBuilds" var="getBuildsURL" />
+
+<div class="alert alert-info">
+	<span class="displaying-help-message-holder">
+		This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
+	</span>
+</div>
 
 <aui:form action="<%= getBuildsURL.toString() %>" name="fm">
 	<aui:row>
-		<div class="alert alert-info">
+	<%
+	if (Validator.isNull(jobName)) {
+	%>
+		<div class="alert alert-warn">
 			<span class="displaying-help-message-holder">
-				This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
+				Please configure this portlet to display Jenkins build information.
 			</span>
 		</div>
-	</aui:row>
-	<aui:row>
-		<aui:col>
-			<aui:select id="jobName" name="jobName">
-				<aui:option label="mdelapenya" value="mdelapenya" />
-				<aui:option label="liferay-portal-master-clone" value="liferay-portal-master-clone" />
-			</aui:select>
-		</aui:col>
-		<aui:col>
-			<input type="submit" value="Query" />
-		</aui:col>
-	</aui:row>
-	<aui:row>
+	<%
+	}
+	else {
+	%>
 		<%@ include file="builds.jspf" %>
+	<%
+	}
+	%>
 	</aui:row>
 </aui:form>
