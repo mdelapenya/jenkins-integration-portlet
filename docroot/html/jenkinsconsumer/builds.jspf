@@ -50,6 +50,7 @@
 						hSpacing: 4
 					}
 				},
+				seriesKeys:["Passed", "Skipped", "Total", "Failed"],
 				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
