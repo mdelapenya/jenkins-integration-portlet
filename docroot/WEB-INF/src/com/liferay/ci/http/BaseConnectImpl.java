@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
-public class BaseConnectImpl {
+public abstract class BaseConnectImpl {
 
 	public BaseConnectImpl() throws IOException {
 		super();
@@ -23,6 +23,8 @@ public class BaseConnectImpl {
 
 		user = properties.getProperty("user");
 		password = properties.getProperty("password");
+
+		setBaseAPIURL(properties.getProperty("baseapiurl"));
 	}
 
 	protected InputStream connect(String apiURL) throws IOException {
@@ -51,6 +53,8 @@ public class BaseConnectImpl {
 		user = newUser;
 		password = newPassword;
 	}
+
+	protected abstract void setBaseAPIURL(String baseApiURL);
 
 	private static String user;
 	private static String password;

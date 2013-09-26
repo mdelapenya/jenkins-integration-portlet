@@ -52,6 +52,12 @@ public class JenkinsConnectUtil {
 		getService().setAuthConfiguration(user, password);
 	}
 
+	public static void setJenkinsBaseApiURL(String baseApiURL)
+		throws IOException {
+
+		getService().setBaseAPIURL(baseApiURL);
+	}
+
 	private JenkinsConnectUtil() {
 	}
 

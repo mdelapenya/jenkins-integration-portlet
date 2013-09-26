@@ -13,7 +13,6 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 		super();
 
 		_apiURLSuffix = "api/json";
-		_baseAPIURL = "http://ci.liferay.org.es/jenkins";
 	}
 
 	public String getAPIURLSuffix() {
@@ -46,7 +45,7 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 		_apiURLSuffix = apiURLSuffix;
 	}
 
-	public void setBaseAPIURL(String baseApiURL) {
+	protected void setBaseAPIURL(String baseApiURL) {
 		_baseAPIURL = baseApiURL;
 	}
 
