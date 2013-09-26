@@ -21,6 +21,13 @@ public abstract class BaseConnectImpl {
 		Properties properties = new Properties();
 		properties.load(is);
 
+		is = getClass().getResourceAsStream(
+			"connection-ext.properties");
+
+		if (is != null) {
+			properties.load(is);
+		}
+
 		user = properties.getProperty("user");
 		password = properties.getProperty("password");
 
