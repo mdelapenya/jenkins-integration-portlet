@@ -12,7 +12,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 public class JenkinsConnectUtil {
 
-	public static JSONArray getBuilds(String jobName)
+	public static JSONArray getBuilds(String jobName, int maxNumber)
 		throws IOException, JSONException {
 
 		JSONObject json = getJob(jobName);
@@ -21,7 +21,13 @@ public class JenkinsConnectUtil {
 
 		JSONArray result = new JSONArray();
 
-		for (int i = 0; i < builds.length(); i++) {
+		int end = builds.length() - 1;
+
+		if ((maxNumber > 0) && (maxNumber < end)) {
+			end = maxNumber;
+		}
+
+		for (int i = 0; i <= end; i++) {
 			JSONObject build = (JSONObject)builds.get(i);
 
 			try {

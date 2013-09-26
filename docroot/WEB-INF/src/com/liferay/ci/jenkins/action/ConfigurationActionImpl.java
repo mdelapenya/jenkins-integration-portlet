@@ -17,6 +17,7 @@ package com.liferay.ci.jenkins.action;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 
 import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
@@ -36,12 +37,22 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String user = getParameter(actionRequest, "username");
 		String password = getParameter(actionRequest, "password");
 
-		if (Validator.isNotNull(user) && Validator.isNotNull(password)) {
-			super.processAction(portletConfig, actionRequest, actionResponse);
+		super.processAction(portletConfig, actionRequest, actionResponse);
 
+		if (Validator.isNotNull(user) && Validator.isNotNull(password)) {
 			// reset http connect configuration
 
 			JenkinsConnectUtil.setAuthConfiguration(user, password);
+		}
+		else {
+			// this is needed to reset unused preferences
+
+			PortletPreferences preferences = actionRequest.getPreferences();
+
+			preferences.reset("username");
+			preferences.reset("password");
+
+			preferences.store();
 		}
 	}
 

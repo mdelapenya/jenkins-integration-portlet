@@ -19,6 +19,7 @@
 <%
 String userName = GetterUtil.getString(portletPreferences.getValue("username", null));
 String password = GetterUtil.getString(portletPreferences.getValue("password", null));
+String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnumber", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -36,6 +37,15 @@ String password = GetterUtil.getString(portletPreferences.getValue("password", n
 		<aui:input cssClass="lfr-input-text-container" label="username" name="preferences--username--" type="text" value="<%= userName %>" />
 
 		<aui:input label="password" name="preferences--password--" type="password" value="" />
+	</aui:fieldset>
+
+	<aui:fieldset label="builds-view-configuration">
+		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
+			<aui:option selected='<%= buildsNumber == "5" %>' label="5" value="5" />
+			<aui:option selected='<%= buildsNumber == "10" %>' label="10" value="10" />
+			<aui:option selected='<%= buildsNumber == "25" %>' label="25" value="25" />
+			<aui:option selected='<%= buildsNumber == "50" %>' label="50" value="50" />
+		</aui:select>
 	</aui:fieldset>
 
 	<aui:button-row>
