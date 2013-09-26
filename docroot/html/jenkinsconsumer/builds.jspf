@@ -6,16 +6,16 @@
 	if (testResults != null) {
 %>
 		<style>
-			#chartbox {
+			#<portlet:namespace/>chartbox {
 				width: 600px;
 				height: 400px;
 			}
 		</style>
 
-		<div id="chartbox"></div>
+		<div id="<portlet:namespace/>chartbox"></div>
 
 		<aui:script use="charts-legend">
-			var myDataValues = [
+			var <portlet:namespace/>myDataValues = [
 				<%
 				for (int i = testResults.length() -1; i >= 0; i--) {
 					JSONObject testResult = (JSONObject)testResults.get(i);
@@ -38,9 +38,9 @@
 				%>
 			];
 
-			var chartbox = new A.Chart({
+			var <portlet:namespace/>chartbox = new A.Chart({
 				categoryKey: "build",
-				dataProvider: myDataValues,
+				dataProvider: <portlet:namespace/>myDataValues,
 				legend: {
 					position: "right",
 					width: 300,
@@ -50,7 +50,7 @@
 						hSpacing: 4
 					}
 				},
-				render: "#chartbox"
+				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
 <%
