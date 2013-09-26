@@ -27,7 +27,7 @@
 
 					int totalCount = passCount + skipCount + failCount;
 
-					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount + ", Failed:" + failCount + ", Skipped:" + skipCount + ", Total:" + totalCount + "}";
+					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount + ", Skipped:" + skipCount + ", Total:" + totalCount + ", Failed: " + failCount + "}";
 
 					if (i > 0) {
 						line += ",";
