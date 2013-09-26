@@ -41,10 +41,7 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 	</aui:fieldset>
 
 	<aui:fieldset label="builds-view-configuration">
-		<aui:select id="preferences--jobname--" label="job-name" name="preferences--jobname--">
-			<aui:option selected='<%= jobName.equals("mdelapenya") %>' label="mdelapenya" value="mdelapenya" />
-			<aui:option selected='<%= jobName.equals("liferay-portal-master-clone") %>' label="liferay-portal-master-clone" value="liferay-portal-master-clone" />
-		</aui:select>
+		<aui:input cssClass="lfr-input-text-container" label="job-name" name="preferences--jobname--" type="text" value="<%= jobName %>" />
 
 		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
 			<aui:option selected='<%= buildsNumber.equals("5") %>' label="5" value="5" />
