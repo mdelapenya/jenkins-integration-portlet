@@ -42,6 +42,7 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 	}
 	else {
 	%>
+		<h2><%= jobName %> Test Build Stats</h2>
 		<%@ include file="builds.jspf" %>
 	<%
 	}
