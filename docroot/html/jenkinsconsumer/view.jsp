@@ -39,7 +39,7 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 				</div>
 			</c:when>
 			<c:otherwise>
-				<h2><%= jobName %> Test Build Stats</h2>
+				<h2>Test Build Stats for: <%= jobName %></h2>
 				<%@ include file="builds.jspf" %>
 			</c:otherwise>
 		</c:choose>
