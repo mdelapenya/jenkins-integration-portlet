@@ -15,6 +15,7 @@ import org.json.JSONException;
 import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -65,6 +66,8 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 					"TEST_RESULTS", _jobsCache.get(jobCacheKey));
 			}
 			catch (IOException ioe) {
+				SessionErrors.add(request, ioe.getClass());
+
 				_log.error("The job was not available", ioe);
 			}
 			catch (JSONException e) {

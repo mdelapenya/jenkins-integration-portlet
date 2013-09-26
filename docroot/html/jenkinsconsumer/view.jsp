@@ -38,6 +38,9 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 		</c:when>
 		<c:otherwise>
 			<h2><liferay-ui:message key="test-build-stats-for" /> <%= jobName %></h2>
+
+			<liferay-ui:error exception="<%= FileNotFoundException.class %>" message="the-job-could-not-be-retrieved-please-review-configuration" />
+
 			<%@ include file="builds.jspf" %>
 		</c:otherwise>
 	</c:choose>
