@@ -24,28 +24,24 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 
 <aui:form action="<%= getBuildsURL.toString() %>" name="fm">
 	<aui:row>
-	<%
-	if (Validator.isNull(jobName)) {
-	%>
-		<div class="alert alert-info">
-			<span class="displaying-help-message-holder">
-				This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
-			</span>
-		</div>
+		<c:choose>
+			<c:when test="<%= Validator.isNull(jobName) %>">
+				<div class="alert alert-info">
+					<span class="displaying-help-message-holder">
+						This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
+					</span>
+				</div>
 
-		<div class="alert alert-warn">
-			<span class="displaying-help-message-holder">
-				Please configure this portlet to display Jenkins build information.
-			</span>
-		</div>
-	<%
-	}
-	else {
-	%>
-		<h2><%= jobName %> Test Build Stats</h2>
-		<%@ include file="builds.jspf" %>
-	<%
-	}
-	%>
+				<div class="alert alert-warn">
+					<span class="displaying-help-message-holder">
+						Please configure this portlet to display Jenkins build information.
+					</span>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<h2><%= jobName %> Test Build Stats</h2>
+				<%@ include file="builds.jspf" %>
+			</c:otherwise>
+		</c:choose>
 	</aui:row>
 </aui:form>

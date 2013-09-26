@@ -2,9 +2,8 @@
 
 <%
 	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
-
-	if (testResults != null) {
 %>
+	<c:if test="<%= Validator.isNotNull(testResults) %>">
 		<style>
 			#<portlet:namespace/>chartbox {
 				width: 600px;
@@ -54,6 +53,4 @@
 				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
-<%
-	}
-%>
+	</c:if>
