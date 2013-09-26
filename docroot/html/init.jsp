@@ -11,6 +11,8 @@
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
 
+<%@page import="java.io.FileNotFoundException"%>
+
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
 

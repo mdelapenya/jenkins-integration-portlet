@@ -21,6 +21,7 @@ import javax.portlet.PortletPreferences;
 
 import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -33,6 +34,17 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws Exception {
+
+		String baseAPIURL = getParameter(actionRequest, "baseapiurl");
+
+		if (Validator.isNull(baseAPIURL)) {
+			SessionErrors.add(actionRequest, "baseApiURLError");
+		}
+		else {
+			// change base API URL
+
+			JenkinsConnectUtil.setJenkinsBaseApiURL(baseAPIURL);
+		}
 
 		String user = getParameter(actionRequest, "username");
 		String password = getParameter(actionRequest, "password");

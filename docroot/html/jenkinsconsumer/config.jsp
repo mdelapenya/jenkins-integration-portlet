@@ -21,6 +21,7 @@ String userName = GetterUtil.getString(portletPreferences.getValue("username", n
 String password = GetterUtil.getString(portletPreferences.getValue("password", null));
 String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnumber", null));
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
+String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -41,6 +42,10 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 	</aui:fieldset>
 
 	<aui:fieldset label="builds-view-configuration">
+		<liferay-ui:error key="baseApiURLError" message="please-enter-a-valid-base-api-url" />
+
+		<aui:input cssClass="lfr-input-text-container" label="base-api-url" name="preferences--baseapiurl--" type="text" value="<%= baseApiURL %>" />
+
 		<aui:input cssClass="lfr-input-text-container" label="job-name" name="preferences--jobname--" type="text" value="<%= jobName %>" />
 
 		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
