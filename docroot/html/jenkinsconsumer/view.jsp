@@ -28,18 +28,18 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 			<c:when test="<%= Validator.isNull(jobName) %>">
 				<div class="alert alert-info">
 					<span class="displaying-help-message-holder">
-						This is the <b>Jenkins Consumer Portlet</b> portlet, from you can inspect some Jenkins statistics.
+						<liferay-ui:message key="this-is-the-jenkins-consumer-portlet-portlet-from-you-can-inspect-some-jenkins-statistics" />
 					</span>
 				</div>
 
 				<div class="alert alert-warn">
 					<span class="displaying-help-message-holder">
-						Please configure this portlet to display Jenkins build information.
+						<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
 					</span>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<h2>Test Build Stats for: <%= jobName %></h2>
+				<h2><liferay-ui:message key="test-build-stats-for" /> <%= jobName %></h2>
 				<%@ include file="builds.jspf" %>
 			</c:otherwise>
 		</c:choose>
