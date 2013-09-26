@@ -1,6 +1,8 @@
 package com.liferay.ci.portlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -22,6 +24,8 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 	@Override
 	public void init() throws PortletException {
 		super.init();
+
+		_jobsCache = new HashMap<String, JSONArray>();
 	}
 
 	@Override
@@ -48,10 +52,17 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 					_log.debug("Max BuildNumber for build: " + maxBuildNumber);
 				}
 
-				JSONArray testResults = JenkinsConnectUtil.getBuilds(
-					jobName, maxBuildNumber);
+				String jobCacheKey = jobName + StringPool.POUND + buildsNumber;
 
-				request.setAttribute("TEST_RESULTS", testResults);
+				if (!_jobsCache.containsKey(jobCacheKey)) {
+					JSONArray testResults = JenkinsConnectUtil.getBuilds(
+						jobName, maxBuildNumber);
+
+					_jobsCache.put(jobCacheKey, testResults);
+				}
+
+				request.setAttribute(
+					"TEST_RESULTS", _jobsCache.get(jobCacheKey));
 			}
 			catch (IOException ioe) {
 				_log.error("The job was not available", ioe);
@@ -63,6 +74,8 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 
 		super.render(request, response);
 	}
+
+	private Map<String, JSONArray> _jobsCache;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JenkinsConsumerPortlet.class);
