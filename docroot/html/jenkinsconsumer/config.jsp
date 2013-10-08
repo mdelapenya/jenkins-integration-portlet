@@ -22,6 +22,10 @@ String password = GetterUtil.getString(portletPreferences.getValue("password", n
 String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnumber", null));
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
+
+boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
+boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
+boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -54,6 +58,10 @@ String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl
 			<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
 			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
 		</aui:select>
+
+		<aui:input checked="<%= displaySkipCount %>" cssClass="lfr-input-text-container" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
+		<aui:input checked="<%= displayFailCount %>" cssClass="lfr-input-text-container" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
+		<aui:input checked="<%= displayTotalCount %>" cssClass="lfr-input-text-container" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
 	</aui:fieldset>
 
 	<aui:button-row>

@@ -2,6 +2,24 @@
 
 <%
 	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
+
+boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
+boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
+boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
+
+String seriesKeys = "";
+
+if (displaySkipCount) {
+	seriesKeys += ", 'Skipped'";
+}
+
+if (displayTotalCount) {
+	seriesKeys += ", 'Total'";
+}
+
+if (displayFailCount) {
+	seriesKeys += ", 'Failed'";
+}
 %>
 	<c:if test="<%= Validator.isNotNull(testResults) %>">
 		<style>
@@ -26,7 +44,21 @@
 
 					int totalCount = passCount + skipCount + failCount;
 
-					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount + ", Skipped:" + skipCount + ", Total:" + totalCount + ", Failed: " + failCount + "}";
+					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount;
+
+					if (displaySkipCount) {
+						line += ", Skipped:" + skipCount;
+					}
+
+					if (displayTotalCount) {
+						line +=  ", Total:" + totalCount;
+					}
+
+					if (displayFailCount) {
+						line += ", Failed: " + failCount;
+					}
+
+					line += "}";
 
 					if (i > 0) {
 						line += ",";
@@ -49,7 +81,7 @@
 						hSpacing: 4
 					}
 				},
-				seriesKeys:["Passed", "Skipped", "Total", "Failed"],
+				seriesKeys:['Passed'<%= seriesKeys %>],
 				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
