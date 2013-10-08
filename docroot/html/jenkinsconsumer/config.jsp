@@ -62,6 +62,13 @@ boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("t
 		<aui:input checked="<%= displaySkipCount %>" cssClass="lfr-input-text-container" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
 		<aui:input checked="<%= displayFailCount %>" cssClass="lfr-input-text-container" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
 		<aui:input checked="<%= displayTotalCount %>" cssClass="lfr-input-text-container" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
+
+		<div class="alert alert-info">
+			<span class="displaying-help-message-holder">
+				<liferay-ui:message key="passed-test-count-will-always-be-displayed" />
+			</span>
+		</div>
+
 	</aui:fieldset>
 
 	<aui:button-row>
