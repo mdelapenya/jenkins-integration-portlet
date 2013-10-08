@@ -22,6 +22,9 @@
 			<portlet-mode>view</portlet-mode>
 			<portlet-mode>config</portlet-mode>
 		</supports>
+		<supported-locale>es</supported-locale>
+		<supported-locale>en_GB</supported-locale>
+		<supported-locale>en_US</supported-locale>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Jenkins Consumer Portlet</title>
