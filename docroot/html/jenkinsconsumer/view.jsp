@@ -18,7 +18,9 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
+String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
+String jobURL = baseApiURL + "/job/" + jobName;
 %>
 
 <div>
@@ -37,7 +39,11 @@ String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", nul
 			</div>
 		</c:when>
 		<c:otherwise>
-			<h2><liferay-ui:message key="test-build-stats-for" /> <%= jobName %></h2>
+			<h2>
+				<liferay-ui:icon target="_blank" url="<%= jobURL %>">
+					<liferay-ui:message key="test-build-stats-for" /> <%= jobName %>
+				</liferay-ui:icon>
+			</h2>
 
 			<liferay-ui:error exception="<%= FileNotFoundException.class %>" message="the-job-could-not-be-retrieved-please-review-configuration" />
 
