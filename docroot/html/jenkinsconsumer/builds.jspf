@@ -22,20 +22,27 @@
 boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
 boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
 boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
+boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("passcount", null));
 
 String seriesKeys = "";
 
+if (displayPassCount) {
+	seriesKeys += "'Passed',";
+}
+
 if (displaySkipCount) {
-	seriesKeys += ", 'Skipped'";
+	seriesKeys += "'Skipped',";
 }
 
 if (displayTotalCount) {
-	seriesKeys += ", 'Total'";
+	seriesKeys += "'Total',";
 }
 
 if (displayFailCount) {
-	seriesKeys += ", 'Failed'";
+	seriesKeys += "'Failed',";
 }
+
+seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
 %>
 	<c:if test="<%= Validator.isNotNull(testResults) %>">
 		<style>
@@ -60,7 +67,11 @@ if (displayFailCount) {
 
 					int totalCount = passCount + skipCount + failCount;
 
-					String line = "{build:'" + category.getInt(0) + "', Passed:" + passCount;
+					String line = "{build:'" + category.getInt(0) + "'";
+
+					if (displayPassCount) {
+						line += ", Passed:" + passCount;
+					}
 
 					if (displaySkipCount) {
 						line += ", Skipped:" + skipCount;
@@ -97,7 +108,7 @@ if (displayFailCount) {
 						hSpacing: 4
 					}
 				},
-				seriesKeys:['Passed'<%= seriesKeys %>],
+				seriesKeys:[<%= seriesKeys %>],
 				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
