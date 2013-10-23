@@ -23,6 +23,8 @@ String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnu
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 
+String charType = GetterUtil.getString(portletPreferences.getValue("charttype", "default"));
+
 boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("passcount", null));
 boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
 boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
@@ -58,6 +60,11 @@ boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("t
 			<aui:option selected='<%= buildsNumber.equals("10") %>' label="10" value="10" />
 			<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
 			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
+		</aui:select>
+
+		<aui:select id="preferences--charttype--" label="chart-type" name="preferences--charttype--">
+			<aui:option selected='<%= charType.equals("default") %>' label="default" value="default" />
+			<aui:option selected='<%= charType.equals("column") %>' label="column" value="column" />
 		</aui:select>
 
 		<aui:input checked="<%= displayPassCount %>" cssClass="lfr-input-text-container" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />

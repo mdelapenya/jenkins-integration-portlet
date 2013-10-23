@@ -24,6 +24,8 @@ boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("fa
 boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
 boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("passcount", null));
 
+String charType = GetterUtil.getString(portletPreferences.getValue("charttype", null));
+
 String seriesKeys = "";
 
 if (displayPassCount) {
@@ -109,6 +111,13 @@ seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
 					}
 				},
 				seriesKeys:[<%= seriesKeys %>],
+			<%
+			if (!charType.equals("default")) {
+			%>
+				type: "<%= charType %>",
+			<%
+			}
+			%>
 				render: "#<portlet:namespace/>chartbox"
 			});
 		</aui:script>
