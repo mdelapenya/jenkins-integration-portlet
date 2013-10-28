@@ -10,8 +10,8 @@ As Jenkins provides many metrics by itself, I've decided to start a [Liferay](ht
 
 Below there are some screenshots of the current portlet:
 
-<img alt="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-001.png" />
-<img alt="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-002.png" />
+<img title="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-001.png" />
+<img title="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-002.png" />
 
 ## v.1.0.0
 
