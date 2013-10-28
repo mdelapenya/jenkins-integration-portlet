@@ -8,6 +8,11 @@ Jenkins is an open source continuous integration tool perfect for this goal, so 
 
 As Jenkins provides many metrics by itself, I've decided to start a [Liferay](http://www.liferay.com) + [AlloyUI](http://www.alloyui.com) + [Jenkins](http://www.jenkins-ci.org) integration portlet that allows to display tests results in an easy and portal-deployable way. For that, a Liferay portal Admin, can deploy this portlet in his portal, allowing its users to watch last builds tests results, in an user-friendly style, using AlloyUI built-in cappabilities.
 
+Below there are some screenshots of the current portlet:
+
+<img alt="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-001.png" />
+<img alt="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-002.png" />
+
 ## v.1.0.0
 
 * Supports Basic Http Authentication
