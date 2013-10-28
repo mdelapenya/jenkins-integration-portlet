@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@ include file="/html/init.jsp" %>
 
 <%
@@ -28,22 +29,28 @@ String charType = GetterUtil.getString(portletPreferences.getValue("charttype", 
 
 boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
 
+String i18nBuild = LanguageUtil.get(pageContext, "build");
+String i18nPassed = LanguageUtil.get(pageContext, "passed");
+String i18nSkipped = LanguageUtil.get(pageContext, "skipped");
+String i18nFailed = LanguageUtil.get(pageContext, "failed");
+String i18nTotal = LanguageUtil.get(pageContext, "total");
+
 String seriesKeys = "";
 
 if (displayPassCount) {
-	seriesKeys += "'Passed',";
+	seriesKeys += "'" + i18nPassed + "',";
 }
 
 if (displaySkipCount) {
-	seriesKeys += "'Skipped',";
+	seriesKeys += "'" + i18nSkipped + "',";
 }
 
 if (displayTotalCount) {
-	seriesKeys += "'Total',";
+	seriesKeys += "'" + i18nTotal + "',";
 }
 
 if (displayFailCount) {
-	seriesKeys += "'Failed',";
+	seriesKeys += "'" + i18nFailed + "',";
 }
 
 seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
@@ -71,22 +78,22 @@ seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
 
 					int totalCount = passCount + skipCount + failCount;
 
-					String line = "{build:'" + category.getInt(0) + "'";
+					String line = "{" + i18nBuild + ":'" + category.getInt(0) + "'";
 
 					if (displayPassCount) {
-						line += ", Passed:" + passCount;
+						line += ", " + i18nPassed + ":" + passCount;
 					}
 
 					if (displaySkipCount) {
-						line += ", Skipped:" + skipCount;
+						line += ", " + i18nSkipped + ":" + skipCount;
 					}
 
 					if (displayTotalCount) {
-						line +=  ", Total:" + totalCount;
+						line +=  ", " + i18nTotal + ":" + totalCount;
 					}
 
 					if (displayFailCount) {
-						line += ", Failed: " + failCount;
+						line += ", " + i18nFailed + ": " + failCount;
 					}
 
 					line += "}";
@@ -101,7 +108,7 @@ seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
 			];
 
 			var <portlet:namespace/>chartbox = new A.Chart({
-				categoryKey: "build",
+				categoryKey: "<%= i18nBuild %>",
 				dataProvider: <portlet:namespace/>myDataValues,
 				legend: {
 					position: "right",
