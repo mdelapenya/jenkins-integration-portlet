@@ -38,7 +38,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * 
  * @author Manuel de la Peña
  */
-public class JenkinsConsumerPortlet extends MVCPortlet {
+public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 	@Override
 	public void init() throws PortletException {
@@ -99,6 +99,6 @@ public class JenkinsConsumerPortlet extends MVCPortlet {
 	private Map<String, JSONArray> _jobsCache;
 
 	private static Log _log = LogFactoryUtil.getLog(
-		JenkinsConsumerPortlet.class);
+		JenkinsIntegrationPortlet.class);
 
 }

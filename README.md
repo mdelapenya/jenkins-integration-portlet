@@ -1,4 +1,4 @@
-# jenkins-consumer-portlet
+# Jenkins Integration Portlet
 
 ## Motivation
 

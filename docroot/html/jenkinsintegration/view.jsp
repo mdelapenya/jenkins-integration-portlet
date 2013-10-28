@@ -28,7 +28,7 @@ String jobURL = baseApiURL + "/job/" + jobName;
 		<c:when test="<%= Validator.isNull(jobName) %>">
 			<div class="alert alert-info">
 				<span class="displaying-help-message-holder">
-					<liferay-ui:message key="this-is-the-jenkins-consumer-portlet-portlet-from-you-can-inspect-some-jenkins-statistics" />
+					<liferay-ui:message key="this-is-the-jenkins-integration-portlet-portlet-from-you-can-inspect-some-jenkins-statistics" />
 				</span>
 			</div>
 
