@@ -64,17 +64,17 @@ boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("t
 			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
 		</aui:select>
 
-		<aui:input checked="<%= displayStacked %>" cssClass="lfr-input-text-container" label="display-stacked" name="preferences--stacked--" type="checkbox" />
+		<aui:input checked="<%= displayStacked %>" label="display-stacked" name="preferences--stacked--" type="checkbox" />
 
 		<aui:select id="preferences--charttype--" label="chart-type" name="preferences--charttype--">
 			<aui:option selected='<%= charType.equals("default") %>' label="default" value="default" />
 			<aui:option selected='<%= charType.equals("column") %>' label="column" value="column" />
 		</aui:select>
 
-		<aui:input checked="<%= displayPassCount %>" cssClass="lfr-input-text-container" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />
-		<aui:input checked="<%= displaySkipCount %>" cssClass="lfr-input-text-container" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
-		<aui:input checked="<%= displayFailCount %>" cssClass="lfr-input-text-container" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
-		<aui:input checked="<%= displayTotalCount %>" cssClass="lfr-input-text-container" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
+		<aui:input checked="<%= displayPassCount %>" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />
+		<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
+		<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
+		<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
 
 	</aui:fieldset>
 
