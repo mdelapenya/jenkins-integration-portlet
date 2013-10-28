@@ -26,6 +26,8 @@ boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("pa
 
 String charType = GetterUtil.getString(portletPreferences.getValue("charttype", null));
 
+boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
+
 String seriesKeys = "";
 
 if (displayPassCount) {
@@ -112,6 +114,11 @@ seriesKeys = seriesKeys.substring(0, seriesKeys.length() - 1);
 				},
 				seriesKeys:[<%= seriesKeys %>],
 			<%
+			if (displayStacked) {
+			%>
+				stacked: "<%= true %>",
+			<%
+			}
 			if (!charType.equals("default")) {
 			%>
 				type: "<%= charType %>",

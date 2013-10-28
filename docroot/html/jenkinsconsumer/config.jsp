@@ -23,6 +23,8 @@ String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnu
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 
+boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
+
 String charType = GetterUtil.getString(portletPreferences.getValue("charttype", "default"));
 
 boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("passcount", null));
@@ -61,6 +63,8 @@ boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("t
 			<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
 			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
 		</aui:select>
+
+		<aui:input checked="<%= displayStacked %>" cssClass="lfr-input-text-container" label="display-stacked" name="preferences--stacked--" type="checkbox" />
 
 		<aui:select id="preferences--charttype--" label="chart-type" name="preferences--charttype--">
 			<aui:option selected='<%= charType.equals("default") %>' label="default" value="default" />
