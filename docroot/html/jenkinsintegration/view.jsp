@@ -40,8 +40,8 @@ String jobURL = baseApiURL + "/job/" + jobName;
 		</c:when>
 		<c:otherwise>
 			<h2>
-				<liferay-ui:icon target="_blank" url="<%= jobURL %>">
-					<liferay-ui:message key="test-build-stats-for" /> <%= jobName %>
+				<liferay-ui:icon target="_blank" url="<%= HtmlUtil.escape(jobURL) %>">
+					<liferay-ui:message key="test-build-stats-for" /> <%= HtmlUtil.escape(jobName) %>
 				</liferay-ui:icon>
 			</h2>
 
