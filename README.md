@@ -13,6 +13,11 @@ Below there are some screenshots of the current portlet:
 <img title="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-001.png" />
 <img title="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-002.png" />
 
+## Configuration
+
+There is a properties files under 'docroot/WEB-INF/src/com/liferay/ci/http' named *connection.properties*. This file contains some properties with empty values for connecting to your Jenkins server, even if it is under a web server with Basic Authentication. You can extend that file with the *-ext* name convention, creating a *connection-ext.properties*, where you will put custom values for your application.
+
+
 ## v.1.0.0
 
 * Supports Basic Http Authentication
