@@ -51,21 +51,22 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 
+		PortletPreferences preferences = actionRequest.getPreferences();
+
 		if (Validator.isNotNull(user) && Validator.isNotNull(password)) {
 			// reset http connect configuration
 
 			JenkinsConnectUtil.setAuthConfiguration(user, password);
 		}
 		else {
-			// this is needed to reset unused preferences
-
-			PortletPreferences preferences = actionRequest.getPreferences();
-
 			preferences.reset("username");
-			preferences.reset("password");
-
-			preferences.store();
 		}
+
+		// this is needed to reset unused preferences
+
+		preferences.reset("password");
+
+		preferences.store();
 	}
 
 }
