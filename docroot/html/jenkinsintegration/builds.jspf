@@ -74,11 +74,21 @@ if (Validator.isNotNull(seriesKeys)) {
 					JSONObject testResult = (JSONObject)testResults.get(i);
 
 					JSONArray category = (JSONArray)testResult.get("buildNumber");
-					int passCount = testResult.getInt("passCount");
+
 					int skipCount = testResult.getInt("skipCount");
 					int failCount = testResult.getInt("failCount");
 
-					int totalCount = passCount + skipCount + failCount;
+					int passCount = 0;
+					int totalCount = 0;
+
+					if (!testResult.has("passCount") && testResult.has("totalCount")) {
+						totalCount = testResult.getInt("totalCount");
+						passCount = totalCount - failCount - skipCount;
+					}
+					else {
+						passCount = testResult.getInt("passCount");
+						totalCount = passCount + skipCount + failCount;
+					}
 
 					String line = "{" + i18nBuild + ":'" + category.getInt(0) + "'";
 
