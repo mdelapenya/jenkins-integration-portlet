@@ -18,7 +18,7 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
-	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
+JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
 
 boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
 boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
