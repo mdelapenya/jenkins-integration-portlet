@@ -39,13 +39,13 @@ public class JenkinsConnectUtil {
 
 		JSONArray result = new JSONArray();
 
-		int end = builds.length() - 1;
+		int end = builds.length();
 
 		if ((maxNumber > 0) && (maxNumber < end)) {
 			end = maxNumber;
 		}
 
-		for (int i = 0; i <= end; i++) {
+		for (int i = 0; i < end; i++) {
 			JSONObject build = (JSONObject)builds.get(i);
 
 			try {
