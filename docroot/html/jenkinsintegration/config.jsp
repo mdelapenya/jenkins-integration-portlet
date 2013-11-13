@@ -80,13 +80,13 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--passedcountcolor--" type="text" value="<%= passedCountColor %>" />
 
 		<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--skippedcountcolor--" type="text" value="<%= skippedCountColor %>" />
+		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--skippedcountcolor--" type="text" value="<%= skippedCountColor %>" />
 
 		<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--failedcountcolor--" type="text" value="<%= failedCountColor %>" />
+		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--failedcountcolor--" type="text" value="<%= failedCountColor %>" />
 
 		<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--totalcountcolor--" type="text" value="<%= totalCountColor %>" />
+		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--totalcountcolor--" type="text" value="<%= totalCountColor %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
