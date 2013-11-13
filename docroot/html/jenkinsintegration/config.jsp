@@ -31,6 +31,11 @@ boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("pa
 boolean displaySkipCount = GetterUtil.getBoolean(portletPreferences.getValue("skipcount", null));
 boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("failcount", null));
 boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
+
+String passedCountColor = GetterUtil.getString(portletPreferences.getValue("passedcountcolor", JenkinsIntegrationConstants.DEFAULT_PASSED_COLOR));
+String skippedCountColor = GetterUtil.getString(portletPreferences.getValue("skippedcountcolor", JenkinsIntegrationConstants.DEFAULT_SKIPPED_COLOR));
+String failedCountColor = GetterUtil.getString(portletPreferences.getValue("failedcountcolor", JenkinsIntegrationConstants.DEFAULT_FAILED_COLOR));
+String totalCountColor = GetterUtil.getString(portletPreferences.getValue("totalcountcolor", JenkinsIntegrationConstants.DEFAULT_TOTAL_COLOR));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -72,13 +77,30 @@ boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("t
 		</aui:select>
 
 		<aui:input checked="<%= displayPassCount %>" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />
-		<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
-		<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
-		<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
+		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--passedcountcolor--" type="text" value="<%= passedCountColor %>" />
 
+		<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
+		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--skippedcountcolor--" type="text" value="<%= skippedCountColor %>" />
+
+		<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
+		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--failedcountcolor--" type="text" value="<%= failedCountColor %>" />
+
+		<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
+		<aui:input cssClass="color-picker-trigger" label="color" name="preferences--totalcountcolor--" type="text" value="<%= totalCountColor %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script use="aui-color-picker-popover">
+	var colorPicker = new A.ColorPickerPopover({
+		trigger: '.color-picker-trigger',
+		zIndex: 2
+	}).render();
+
+	colorPicker.on('select', function(event) {
+		event.trigger.val(event.color);
+	});
+</aui:script>

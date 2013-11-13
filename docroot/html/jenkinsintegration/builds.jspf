@@ -25,6 +25,11 @@ boolean displayFailCount = GetterUtil.getBoolean(portletPreferences.getValue("fa
 boolean displayTotalCount = GetterUtil.getBoolean(portletPreferences.getValue("totalcount", null));
 boolean displayPassCount = GetterUtil.getBoolean(portletPreferences.getValue("passcount", null));
 
+String passedCountColor = GetterUtil.getString(portletPreferences.getValue("passedcountcolor", null));
+String skippedCountColor = GetterUtil.getString(portletPreferences.getValue("skippedcountcolor", null));
+String failedCountColor = GetterUtil.getString(portletPreferences.getValue("failedcountcolor", null));
+String totalCountColor = GetterUtil.getString(portletPreferences.getValue("totalcountcolor", null));
+
 String charType = GetterUtil.getString(portletPreferences.getValue("charttype", null));
 
 boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
@@ -119,6 +124,39 @@ if (Validator.isNotNull(seriesKeys)) {
 				%>
 			];
 
+			var stylesDef = {
+				series:{
+				<% if (displayPassCount) {%>
+					<%= i18nPassed %>: {
+						line:{
+							color:"<%= passedCountColor %>"
+						}
+					},
+				<%} %>
+				<% if (displaySkipCount) {%>
+					<%= i18nSkipped %>: {
+						line:{
+							color:"<%= skippedCountColor %>"
+						}
+					},
+				<%} %>
+				<% if (displayFailCount) {%>
+					<%= i18nFailed %>: {
+						line:{
+							color:"<%= failedCountColor %>"
+						}
+					},
+				<%} %>
+				<% if (displayTotalCount) {%>
+					<%= i18nTotal %>: {
+						line:{
+							color:"<%= totalCountColor %>"
+						}
+					}
+				<%} %>
+				}
+			}
+
 			var <portlet:namespace/>chartbox = new A.Chart({
 				categoryKey: "<%= i18nBuild %>",
 				dataProvider: <portlet:namespace/>myDataValues,
@@ -132,6 +170,7 @@ if (Validator.isNotNull(seriesKeys)) {
 					}
 				},
 				seriesKeys:[<%= seriesKeys %>],
+				styles: stylesDef,
 			<%
 			if (displayStacked) {
 			%>
