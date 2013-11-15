@@ -7,6 +7,15 @@
 		<portlet-name>jenkinsintegrationportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<configuration-action-class>com.liferay.ci.jenkins.action.ConfigurationActionImpl</configuration-action-class>
+		<scheduler-entry>
+			<scheduler-event-listener-class>com.liferay.ci.portlet.jenkins.messaging.CheckBuildMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<property-key>jenkins.build.check.interval</property-key>
+					<time-unit>minute</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
