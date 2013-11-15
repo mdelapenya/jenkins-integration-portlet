@@ -23,6 +23,7 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
+<%@page import="com.liferay.ci.json.JSONUtil"%>
 <%@page import="com.liferay.ci.portlet.JenkinsIntegrationConstants"%>
 
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
