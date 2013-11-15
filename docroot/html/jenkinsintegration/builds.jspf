@@ -246,7 +246,7 @@ if (Validator.isNotNull(seriesKeys)) {
 			<%
 			if (displayStacked) {
 			%>
-				stacked: "<%= true %>",
+				stacked: "<%= Boolean.TRUE %>",
 			<%
 			}
 			if (!charType.equals("default")) {
