@@ -37,19 +37,23 @@ public class LiferayJenkinsBuildCache {
 	}
 
 	public void clear(String portletId) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		portletCache.clear();
 	}
 
 	public boolean containsKey(String portletId, Object key) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.containsKey(key);
 	}
 
 	public boolean containsValue(String portletId, Object value) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		if (!_buildsCache.containsKey(portletId)) {
+			_buildsCache.put(portletId, new HashMap<String, JSONArray>());
+		}
+
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.containsValue(value);
 	}
@@ -57,31 +61,31 @@ public class LiferayJenkinsBuildCache {
 	public Set<java.util.Map.Entry<String, JSONArray>> entrySet(
 			String portletId) {
 
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.entrySet();
 	}
 
 	public JSONArray get(String portletId, Object key) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.get(key);
 	}
 
 	public boolean isEmpty(String portletId) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.isEmpty();
 	}
 
 	public Set<String> keySet(String portletId) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.keySet();
 	}
 
 	public JSONArray put(String portletId, String key, JSONArray value) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.put(key, value);
 	}
@@ -89,27 +93,35 @@ public class LiferayJenkinsBuildCache {
 	public void putAll(
 		String portletId, Map<? extends String, ? extends JSONArray> m) {
 
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		portletCache.putAll(m);
 	}
 
 	public JSONArray remove(String portletId, Object key) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.remove(key);
 	}
 
 	public int size(String portletId) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.size();
 	}
 
 	public Collection<JSONArray> values(String portletId) {
-		Map<String, JSONArray> portletCache = _buildsCache.get(portletId);
+		Map<String, JSONArray> portletCache = _getPortletCache(portletId);
 
 		return portletCache.values();
+	}
+
+	private Map<String, JSONArray> _getPortletCache(String portletId) {
+		if (!_buildsCache.containsKey(portletId)) {
+			return _buildsCache.put(portletId, new HashMap<String, JSONArray>());
+		}
+
+		return _buildsCache.get(portletId);
 	}
 
 	private void _initialize() {
