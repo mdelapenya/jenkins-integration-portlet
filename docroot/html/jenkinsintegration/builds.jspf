@@ -128,6 +128,24 @@ if (Validator.isNotNull(seriesKeys)) {
 				series:{
 				<% if (displayPassCount) {%>
 					<%= i18nPassed %>: {
+						marker:{
+							fill:{
+								color:"<%= passedCountColor %>"
+							},
+							border:{
+								color:"<%= passedCountColor %>"
+							},
+							over:{
+								fill:{
+									color:"#ffffff"
+								},
+								border:{
+									color:"#fe0000"
+								},
+								width: 12,
+								height: 12
+							}
+						},
 						line:{
 							color:"<%= passedCountColor %>"
 						}
@@ -135,6 +153,24 @@ if (Validator.isNotNull(seriesKeys)) {
 				<%} %>
 				<% if (displaySkipCount) {%>
 					<%= i18nSkipped %>: {
+						marker:{
+							fill:{
+								color:"<%= skippedCountColor %>"
+							},
+							border:{
+								color:"<%= skippedCountColor %>"
+							},
+							over:{
+								fill:{
+									color:"#ffffff"
+								},
+								border:{
+									color:"#fe0000"
+								},
+								width: 12,
+								height: 12
+							}
+						},
 						line:{
 							color:"<%= skippedCountColor %>"
 						}
@@ -142,6 +178,24 @@ if (Validator.isNotNull(seriesKeys)) {
 				<%} %>
 				<% if (displayFailCount) {%>
 					<%= i18nFailed %>: {
+						marker:{
+							fill:{
+								color:"<%= failedCountColor %>"
+							},
+							border:{
+								color:"<%= failedCountColor %>"
+							},
+							over:{
+								fill:{
+									color:"#ffffff"
+								},
+								border:{
+									color:"#fe0000"
+								},
+								width: 12,
+								height: 12
+							}
+						},
 						line:{
 							color:"<%= failedCountColor %>"
 						}
@@ -149,6 +203,24 @@ if (Validator.isNotNull(seriesKeys)) {
 				<%} %>
 				<% if (displayTotalCount) {%>
 					<%= i18nTotal %>: {
+						marker:{
+							fill:{
+								color:"<%= totalCountColor %>"
+							},
+							border:{
+								color:"<%= totalCountColor %>"
+							},
+							over:{
+								fill:{
+									color:"#ffffff"
+								},
+								border:{
+									color:"#fe0000"
+								},
+								width: 12,
+								height: 12
+							}
+						},
 						line:{
 							color:"<%= totalCountColor %>"
 						}
