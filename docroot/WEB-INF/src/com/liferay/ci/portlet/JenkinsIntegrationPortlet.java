@@ -47,6 +47,10 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		_cache = new LiferayJenkinsBuildCache();
 	}
 
+	public static LiferayJenkinsBuildCache getCache() {
+		return _cache;
+	}
+
 	@Override
 	public void render(RenderRequest request, RenderResponse response)
 		throws PortletException, IOException {
