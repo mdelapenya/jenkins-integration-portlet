@@ -15,8 +15,6 @@
 package com.liferay.ci.portlet;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -27,11 +25,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.liferay.ci.http.JenkinsConnectUtil;
+import com.liferay.ci.jenkins.cache.LiferayJenkinsBuildCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -44,7 +44,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 	public void init() throws PortletException {
 		super.init();
 
-		_jobsCache = new HashMap<String, JSONArray>();
+		_cache = new LiferayJenkinsBuildCache();
 	}
 
 	@Override
@@ -52,6 +52,8 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		throws PortletException, IOException {
 
 		PortletPreferences portletPreferences = request.getPreferences();
+
+		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 
 		String jobName = portletPreferences.getValue(
 			"jobname", StringPool.BLANK);
@@ -73,15 +75,15 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 				String jobCacheKey = jobName + StringPool.POUND + buildsNumber;
 
-				if (!_jobsCache.containsKey(jobCacheKey)) {
+				if (!_cache.containsKey(portletId, jobCacheKey)) {
 					JSONArray testResults = JenkinsConnectUtil.getBuilds(
 						jobName, maxBuildNumber);
 
-					_jobsCache.put(jobCacheKey, testResults);
+					_cache.put(portletId, jobCacheKey, testResults);
 				}
 
 				request.setAttribute(
-					"TEST_RESULTS", _jobsCache.get(jobCacheKey));
+					"TEST_RESULTS", _cache.get(portletId, jobCacheKey));
 			}
 			catch (IOException ioe) {
 				SessionErrors.add(request, ioe.getClass());
@@ -96,7 +98,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		super.render(request, response);
 	}
 
-	private Map<String, JSONArray> _jobsCache;
+	private static LiferayJenkinsBuildCache _cache;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JenkinsIntegrationPortlet.class);
