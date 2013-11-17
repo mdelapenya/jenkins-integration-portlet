@@ -112,6 +112,14 @@ public class LiferayJenkinsBuildCache {
 		return portletCache.values();
 	}
 
+	private Map<String, JSONArray> _getPortletCache(String portletId) {
+		if (!_buildsCache.containsKey(portletId)) {
+			_buildsCache.put(portletId, new HashMap<String, JSONArray>());
+		}
+
+		return _buildsCache.get(portletId);
+	}
+
 	private void _initialize() {
 		_buildsCache = new HashMap<String, Map<String, JSONArray>>();
 	}
