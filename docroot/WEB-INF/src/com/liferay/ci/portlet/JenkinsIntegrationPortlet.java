@@ -69,9 +69,36 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) {
 				buildSeries(request);
 			}
+			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_LIGHTS) {
+				buildLights(request);
+			}
 		}
 
 		super.render(request, response);
+	}
+
+	protected void buildLights(RenderRequest request) {
+		PortletPreferences portletPreferences = request.getPreferences();
+
+		String jobName = portletPreferences.getValue(
+			"jobname", StringPool.BLANK);
+
+		_log.debug("Getting builds for " + jobName);
+
+		try {
+			String lastBuildStatus = JenkinsConnectUtil.getLastBuildStatus(
+				jobName);
+
+			request.setAttribute("LAST_BUILD_STATUS", lastBuildStatus);
+		}
+		catch (IOException ioe) {
+			SessionErrors.add(request, ioe.getClass());
+
+			_log.error("The job was not available", ioe);
+		}
+		catch (JSONException e) {
+			_log.error("The job is not well-formed", e);
+		}
 	}
 
 	protected void buildSeries(RenderRequest request) {
