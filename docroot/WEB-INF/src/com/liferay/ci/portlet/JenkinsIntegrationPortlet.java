@@ -29,6 +29,7 @@ import com.liferay.ci.jenkins.cache.LiferayJenkinsBuildCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -57,49 +58,66 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 		PortletPreferences portletPreferences = request.getPreferences();
 
+		String jobName = portletPreferences.getValue(
+			"jobname", StringPool.BLANK);
+
+		if (!Validator.isNull(jobName)) {
+			int viewMode = GetterUtil.getInteger(
+				portletPreferences.getValue("viewmode", null),
+				JenkinsIntegrationConstants.VIEW_MODE_SERIES);
+
+			if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) {
+				buildSeries(request);
+			}
+		}
+
+		super.render(request, response);
+	}
+
+	protected void buildSeries(RenderRequest request) {
+		PortletPreferences portletPreferences = request.getPreferences();
+
 		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 
 		String jobName = portletPreferences.getValue(
 			"jobname", StringPool.BLANK);
 
-		if (!Validator.isNull(jobName)) {
-			_log.debug("Getting builds for " + jobName);
+		_log.debug("Getting builds for " + jobName);
 
-			String buildsNumber = portletPreferences.getValue(
-				"buildsnumber", StringPool.BLANK);
+		String buildsNumber = portletPreferences.getValue(
+			"buildsnumber", StringPool.BLANK);
 
-			try {
-				int maxBuildNumber = 0;
+		try {
+			int maxBuildNumber = 0;
 
-				if (Validator.isNotNull(buildsNumber)) {
-					maxBuildNumber = Integer.parseInt(buildsNumber);
+			if (Validator.isNotNull(buildsNumber)) {
+				maxBuildNumber = Integer.parseInt(buildsNumber);
 
-					_log.debug("Max BuildNumber for build: " + maxBuildNumber);
-				}
-
-				String jobCacheKey = jobName + StringPool.POUND + buildsNumber;
-
-				if (!_cache.containsKey(portletId, jobCacheKey)) {
-					JSONArray testResults = JenkinsConnectUtil.getBuilds(
-						jobName, maxBuildNumber);
-
-					_cache.put(portletId, jobCacheKey, testResults);
-				}
-
-				request.setAttribute(
-					"TEST_RESULTS", _cache.get(portletId, jobCacheKey));
+				_log.debug(
+					"Max BuildNumber for build: " + maxBuildNumber);
 			}
-			catch (IOException ioe) {
-				SessionErrors.add(request, ioe.getClass());
 
-				_log.error("The job was not available", ioe);
+			String jobCacheKey = jobName + StringPool.POUND +
+				buildsNumber;
+
+			if (!_cache.containsKey(portletId, jobCacheKey)) {
+				JSONArray testResults = JenkinsConnectUtil.getBuilds(
+					jobName, maxBuildNumber);
+
+				_cache.put(portletId, jobCacheKey, testResults);
 			}
-			catch (JSONException e) {
-				_log.error("The job is not well-formed", e);
-			}
+
+			request.setAttribute(
+				"TEST_RESULTS", _cache.get(portletId, jobCacheKey));
 		}
+		catch (IOException ioe) {
+			SessionErrors.add(request, ioe.getClass());
 
-		super.render(request, response);
+			_log.error("The job was not available", ioe);
+		}
+		catch (JSONException e) {
+			_log.error("The job is not well-formed", e);
+		}
 	}
 
 	private static LiferayJenkinsBuildCache _cache;
