@@ -17,6 +17,9 @@ Below there are some screenshots of the current portlet:
 
 There is a properties files under 'docroot/WEB-INF/src/com/liferay/ci/http' named *connection.properties*. This file contains some properties with empty values for connecting to your Jenkins server, even if it is under a web server with Basic Authentication. You can extend that file with the *-ext* name convention, creating a *connection-ext.properties*, where you will put custom values for your application.
 
+## v.1.1.0
+
+* Supports two different display modes: default (as before), and a new one as a traffic light: red/green status depending of last build status 
 
 ## v.1.0.0
 
