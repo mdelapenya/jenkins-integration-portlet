@@ -10,6 +10,8 @@ public class JenkinsIntegrationConstants {
 
 	public static final String DEFAULT_TOTAL_COLOR = "#000000";
 
+	public static final String JENKINS_BUILD_STATUS_ABORTED = "ABORTED";
+
 	public static final String JENKINS_BUILD_STATUS_FAILURE = "FAILURE";
 
 	public static final String JENKINS_BUILD_STATUS_NULL = "null";
@@ -17,6 +19,8 @@ public class JenkinsIntegrationConstants {
 	public static final String JENKINS_BUILD_STATUS_SUCCESS = "SUCCESS";
 
 	public static final String JENKINS_BUILD_STATUS_UNSTABLE = "UNSTABLE";
+
+	public static final int VIEW_MODE_LIGHTS = 2;
 
 	public static final int VIEW_MODE_SERIES = 1;
 
