@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * 
@@ -59,6 +60,27 @@ public class JenkinsConnectUtil {
 					"The build " + build.getInt("number") + " is not present",
 					fnfe);
 			}
+		}
+
+		return result;
+	}
+
+	public static String getLastBuildStatus(String jobName)
+		throws IOException, JSONException {
+
+		JSONObject json = getJob(jobName);
+
+		JSONObject build = (JSONObject)json.get("lastBuild");
+
+		String result = StringPool.BLANK;
+
+		try {
+			result = getService().getLastBuildStatus(build);
+		}
+		catch(FileNotFoundException fnfe) {
+			_log.warn(
+				"The build " + build.getInt("number") + " is not present",
+				fnfe);
 		}
 
 		return result;
