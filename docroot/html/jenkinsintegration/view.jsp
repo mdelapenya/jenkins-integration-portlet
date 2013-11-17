@@ -21,6 +21,8 @@
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String jobURL = baseApiURL + "/job/" + jobName;
+
+int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
 %>
 
 <div>
@@ -33,15 +35,21 @@ String jobURL = baseApiURL + "/job/" + jobName;
 			</div>
 		</c:when>
 		<c:otherwise>
-			<h2>
-				<liferay-ui:icon target="_blank" url="<%= HtmlUtil.escape(jobURL) %>">
-					<liferay-ui:message key="test-build-stats-for" /> <%= HtmlUtil.escape(jobName) %>
-				</liferay-ui:icon>
-			</h2>
-
 			<liferay-ui:error exception="<%= FileNotFoundException.class %>" message="the-job-could-not-be-retrieved-please-review-configuration" />
 
-			<%@ include file="builds.jspf" %>
+			<c:choose>
+				<c:when test="<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>">
+					<h2>
+						<liferay-ui:icon target="_blank" url="<%= HtmlUtil.escape(jobURL) %>">
+							<liferay-ui:message key="test-build-stats-for" /> <%= HtmlUtil.escape(jobName) %>
+						</liferay-ui:icon>
+					</h2>
+
+					<%@ include file="builds.jspf" %>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
 		</c:otherwise>
 	</c:choose>
 </div>

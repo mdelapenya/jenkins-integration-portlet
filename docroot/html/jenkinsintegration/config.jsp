@@ -23,6 +23,8 @@ String buildsNumber = GetterUtil.getString(portletPreferences.getValue("buildsnu
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 
+int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
+
 boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
 
 String charType = GetterUtil.getString(portletPreferences.getValue("charttype", "default"));
@@ -62,31 +64,37 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 
 		<aui:input cssClass="lfr-input-text-container" label="job-name" name="preferences--jobname--" type="text" value="<%= jobName %>" />
 
-		<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
-			<aui:option selected='<%= buildsNumber.equals("5") %>' label="5" value="5" />
-			<aui:option selected='<%= buildsNumber.equals("10") %>' label="10" value="10" />
-			<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
-			<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
+		<aui:select id="preferences--viewmode--" label="view-mode" name="preferences--viewmode--">
+			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>' label="series-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_SERIES %>" />
 		</aui:select>
 
-		<aui:input checked="<%= displayStacked %>" label="display-stacked" name="preferences--stacked--" type="checkbox" />
+		<aui:panel label="series-view-mode">
+			<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
+				<aui:option selected='<%= buildsNumber.equals("5") %>' label="5" value="5" />
+				<aui:option selected='<%= buildsNumber.equals("10") %>' label="10" value="10" />
+				<aui:option selected='<%= buildsNumber.equals("25") %>' label="25" value="25" />
+				<aui:option selected='<%= buildsNumber.equals("50") %>' label="50" value="50" />
+			</aui:select>
 
-		<aui:select id="preferences--charttype--" label="chart-type" name="preferences--charttype--">
-			<aui:option selected='<%= charType.equals("default") %>' label="default" value="default" />
-			<aui:option selected='<%= charType.equals("column") %>' label="column" value="column" />
-		</aui:select>
+			<aui:input checked="<%= displayStacked %>" label="display-stacked" name="preferences--stacked--" type="checkbox" />
 
-		<aui:input checked="<%= displayPassCount %>" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--passedcountcolor--" type="text" value="<%= passedCountColor %>" />
+			<aui:select id="preferences--charttype--" label="chart-type" name="preferences--charttype--">
+				<aui:option selected='<%= charType.equals("default") %>' label="default" value="default" />
+				<aui:option selected='<%= charType.equals("column") %>' label="column" value="column" />
+			</aui:select>
 
-		<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--skippedcountcolor--" type="text" value="<%= skippedCountColor %>" />
+			<aui:input checked="<%= displayPassCount %>" label="display-passed-test-count" name="preferences--passcount--" type="checkbox" />
+			<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--passedcountcolor--" type="text" value="<%= passedCountColor %>" />
 
-		<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--failedcountcolor--" type="text" value="<%= failedCountColor %>" />
+			<aui:input checked="<%= displaySkipCount %>" label="display-skipped-test-count" name="preferences--skipcount--" type="checkbox" />
+			<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--skippedcountcolor--" type="text" value="<%= skippedCountColor %>" />
 
-		<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
-		<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--totalcountcolor--" type="text" value="<%= totalCountColor %>" />
+			<aui:input checked="<%= displayFailCount %>" label="display-failed-test-count" name="preferences--failcount--" type="checkbox" />
+			<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--failedcountcolor--" type="text" value="<%= failedCountColor %>" />
+
+			<aui:input checked="<%= displayTotalCount %>" label="display-total-test-count" name="preferences--totalcount--" type="checkbox" />
+			<aui:input cssClass="color-picker-trigger" inlineField="true" inlineLabel="true" label="color" name="preferences--totalcountcolor--" type="text" value="<%= totalCountColor %>" />
+		</aui:panel>
 	</aui:fieldset>
 
 	<aui:button-row>
