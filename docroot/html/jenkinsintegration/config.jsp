@@ -66,6 +66,7 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 
 		<aui:select id="preferences--viewmode--" label="view-mode" name="preferences--viewmode--">
 			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>' label="series-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_SERIES %>" />
+			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_LIGHTS) %>' label="lights-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_LIGHTS %>" />
 		</aui:select>
 
 		<aui:panel label="series-view-mode">
