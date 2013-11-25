@@ -17,12 +17,18 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
-String lastBuildStatus = (String)request.getAttribute("LAST_BUILD_STATUS");
+String lastBuildStatus = GetterUtil.getString(request.getAttribute("LAST_BUILD_STATUS"), StringPool.BLANK);
 
-String image = "defcon-5";
+String image = "brokenbuild";
 
-if (!lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
-	image = "defcon-1";
+if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
+	image = "null";
+}
+else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
+	image = "everythingisok";
+}
+else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
+	image = "failingtestprincipal";
 }
 %>
 
