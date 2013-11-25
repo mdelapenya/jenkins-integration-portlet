@@ -56,7 +56,9 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 
 		JSONObject buildResult = _get(buildURL + _apiURLSuffix);
 
-		return buildResult.getString("result");
+		Object result = buildResult.get("result");
+
+		return String.valueOf(result);
 	}
 
 	public JSONObject getJob(String jobName)
