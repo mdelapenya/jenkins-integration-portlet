@@ -1,9 +1,5 @@
-.jenkins-integration-portlet {
-	div .jenkins-defcon-1 {
-		background: url(../images/defcon-1.png) no-repeat;
-	}
-
-	div .jenkins-defcon-5 {
-		background: url(../images/defcon-5.png) no-repeat;
+.jenkinsintegration-portlet {
+	.statusLogo {
+		width: 100%;
 	}
 }
