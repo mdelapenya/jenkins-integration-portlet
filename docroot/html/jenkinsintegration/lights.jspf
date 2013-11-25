@@ -18,13 +18,14 @@
 
 <%
 String lastBuildStatus = (String)request.getAttribute("LAST_BUILD_STATUS");
+
+String image = "defcon-5";
+
+if (!lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
+	image = "defcon-1";
+}
 %>
 
-<c:choose>
-	<c:when test="<%= (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) %>">
-		<div class="jenkins-defcon-5"></div>
-	</c:when>
-	<c:otherwise>
-		<div class="jenkins-defcon-1"></div>
-	</c:otherwise>
-</c:choose>
+<div>
+	<img class="statusLogo" src="<%= request.getContextPath() %>/images/<%= image %>.png" />
+</div>
