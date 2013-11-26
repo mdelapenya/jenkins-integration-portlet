@@ -10,11 +10,11 @@ As Jenkins provides many metrics by itself, I've decided to start a [Liferay](ht
 
 Below there are some screenshots of the current portlet:
 
-<img title="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-001.png" />
-<img title="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-002.png" />
-<img title="Jenkins Integration Portlet Sucessfull Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-003.png" />
-<img title="Jenkins Integration Portlet Failing-Tests Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-004.png" />
-<img title="Jenkins Integration Portlet Broken Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/master/images/jenkins-integration-portlet-005.png" />
+<img title="Jenkins Integration Portlet" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.2.x/images/jenkins-integration-portlet-001.png" />
+<img title="Jenkins Integration Portlet Configuration" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.2.x/images/jenkins-integration-portlet-002.png" />
+<img title="Jenkins Integration Portlet Sucessfull Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.2.x/images/jenkins-integration-portlet-003.png" />
+<img title="Jenkins Integration Portlet Failing-Tests Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.2.x/images/jenkins-integration-portlet-004.png" />
+<img title="Jenkins Integration Portlet Broken Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.2.x/images/jenkins-integration-portlet-005.png" />
 
 ## Configuration
 
