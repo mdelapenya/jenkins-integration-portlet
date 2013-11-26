@@ -15,6 +15,7 @@ Below there are some screenshots of the current portlet:
 <img title="Jenkins Integration Portlet Sucessfull Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.1.x/images/jenkins-integration-portlet-003.png" />
 <img title="Jenkins Integration Portlet Failing-Tests Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.1.x/images/jenkins-integration-portlet-004.png" />
 <img title="Jenkins Integration Portlet Broken Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.1.x/images/jenkins-integration-portlet-005.png" />
+<img title="Jenkins Integration Portlet Pending Build" src="https://github.com/mdelapenya/jenkins-integration-portlet/raw/6.1.x/images/jenkins-integration-portlet-006.png" />
 
 ## Configuration
 
