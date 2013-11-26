@@ -28,7 +28,7 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 <div>
 	<c:choose>
 		<c:when test="<%= Validator.isNull(jobName) %>">
-			<div class="alert alert-warn">
+			<div class="portlet-msg-alert">
 				<span class="displaying-help-message-holder">
 					<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
 				</span>

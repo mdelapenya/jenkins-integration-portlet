@@ -46,7 +46,7 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 	<aui:fieldset label="basic-authentication-configuration">
-		<div class="alert alert-info">
+		<div class="portlet-msg-info">
 			<span class="displaying-help-message-holder">
 				<liferay-ui:message key="please-set-up-here-basic-authentication-for-your-ci-server" />
 			</span>
