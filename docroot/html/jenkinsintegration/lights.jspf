@@ -22,7 +22,7 @@ String lastBuildStatus = GetterUtil.getString(request.getAttribute("LAST_BUILD_S
 String image = "brokenbuild";
 
 if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
-	image = "null";
+	image = "waiting";
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
 	image = "everythingisok";
