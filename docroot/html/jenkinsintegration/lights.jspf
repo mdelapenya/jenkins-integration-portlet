@@ -20,6 +20,7 @@
 String lastBuildStatus = GetterUtil.getString(request.getAttribute("LAST_BUILD_STATUS"), StringPool.BLANK);
 
 String image = "brokenbuild";
+String failingTestDiv = StringPool.BLANK;
 
 if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
 	image = "waiting";
@@ -29,9 +30,25 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 	image = "failingtestprincipal";
+
+	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
+
+	JSONObject testResult = (JSONObject)testResults.get(0);
+
+	JSONArray category = (JSONArray)testResult.get("buildNumber");
+
+	int failCount = testResult.getInt("failCount");
+
+	StringBundler sb = new StringBundler();
+	sb.append("<span class='fail-count'>");
+	sb.append(failCount);
+	sb.append("</span>");
+
+	failingTestDiv = sb.toString();
 }
 %>
 
-<div>
+<div class="logo-container">
 	<img class="statusLogo" src="<%= request.getContextPath() %>/images/<%= image %>.png" />
+	<%= failingTestDiv %>
 </div>
