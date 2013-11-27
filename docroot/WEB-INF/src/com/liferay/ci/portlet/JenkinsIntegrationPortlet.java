@@ -90,6 +90,18 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 				jobName);
 
 			request.setAttribute("LAST_BUILD_STATUS", lastBuildStatus);
+
+			if (lastBuildStatus.equals(
+					JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)
+				) {
+
+				// retrieve number of broken tests for last build
+
+				JSONArray testResults = JenkinsConnectUtil.getBuilds(
+					jobName, 1);
+
+				request.setAttribute("TEST_RESULTS", testResults);
+			}
 		}
 		catch (IOException ioe) {
 			SessionErrors.add(request, ioe.getClass());

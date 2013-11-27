@@ -1,5 +1,21 @@
 .jenkinsintegration-portlet {
-	.statusLogo {
-		width: 100%;
+	.logo-container {
+		position: relative;
+
+		.fail-count {
+			bottom: 10px;
+			color: #503700;
+			font-family: "HelveticaNeueMedium", "HelveticaNeue-Medium", "Helvetica Neue Medium", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+			font-stretch: normal;
+			font-size: 25vw;
+			left: 10px;
+			line-height: 360px;
+			position: absolute;
+			width: 100%;
+		}
+
+		.statusLogo {
+			width: 100%;
+		}
 	}
 }
