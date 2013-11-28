@@ -1,4 +1,8 @@
 .jenkinsintegration-portlet {
+	.full-screen {
+		font-size: 1em;
+	}
+
 	.logo-container {
 		position: relative;
 
