@@ -52,3 +52,12 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 	<img class="statusLogo" src="<%= request.getContextPath() %>/images/<%= image %>.png" />
 	<%= failingTestDiv %>
 </div>
+
+<liferay-portlet:renderURL var="renderURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>" >
+</liferay-portlet:renderURL>
+
+<span class="full-screen">
+	<a href="<%= renderURL.toString() %>">
+		<liferay-ui:message key="display-on-full-screen" />
+	</a>
+</span>
