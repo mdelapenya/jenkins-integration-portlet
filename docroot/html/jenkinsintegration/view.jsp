@@ -21,6 +21,7 @@
 String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl", null));
 String jobName = GetterUtil.getString(portletPreferences.getValue("jobname", null));
 String jobURL = baseApiURL + "/job/" + jobName;
+long timeout = GetterUtil.getLong(portletPreferences.getValue("timeout", String.valueOf(JenkinsIntegrationConstants.DEFAULT_TIMEOUT)));
 
 int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
 %>
@@ -64,3 +65,12 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 		</c:otherwise>
 	</c:choose>
 </div>
+
+<aui:script use="aui-base">
+	setTimeout(
+		function(){
+			Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
+		},
+		<%= timeout %>
+	);
+</aui:script>

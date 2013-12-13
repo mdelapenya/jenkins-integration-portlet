@@ -22,6 +22,8 @@ public class JenkinsIntegrationConstants {
 
 	public static final String DEFAULT_SKIPPED_COLOR = "#FF9900";
 
+	public static final long DEFAULT_TIMEOUT = 60000;
+
 	public static final String DEFAULT_TOTAL_COLOR = "#000000";
 
 	public static final String JENKINS_BUILD_STATUS_ABORTED = "ABORTED";
