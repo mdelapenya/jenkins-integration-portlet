@@ -25,6 +25,8 @@ String baseApiURL = GetterUtil.getString(portletPreferences.getValue("baseapiurl
 
 int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
 
+long timeout = GetterUtil.getLong(portletPreferences.getValue("timeout", String.valueOf(JenkinsIntegrationConstants.DEFAULT_TIMEOUT)));
+
 boolean displayStacked = GetterUtil.getBoolean(portletPreferences.getValue("stacked", null));
 
 String charType = GetterUtil.getString(portletPreferences.getValue("charttype", "default"));
@@ -63,6 +65,8 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 		<aui:input cssClass="lfr-input-text-container" label="base-api-url" name="preferences--baseapiurl--" type="text" value="<%= baseApiURL %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="job-name" name="preferences--jobname--" type="text" value="<%= jobName %>" />
+
+		<aui:input cssClass="lfr-input-text-container" label="reload-timeout" name="preferences--timeout--" type="text" value="<%= timeout %>" />
 
 		<aui:select id="preferences--viewmode--" label="view-mode" name="preferences--viewmode--">
 			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>' label="series-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_SERIES %>" />
