@@ -18,8 +18,24 @@
 			width: 100%;
 		}
 
+		.label {
+			font-size: 1.3em;
+			position: absolute;
+			line-height: 38px;
+		}
+
 		.statusLogo {
 			width: 100%;
+		}
+
+		&.bottom .label {
+			right: 10px;
+			bottom: 10px;
+		}
+
+		&.top .label {
+			right: 10px;
+			top: 10px;
 		}
 	}
 }

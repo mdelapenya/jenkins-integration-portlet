@@ -21,12 +21,15 @@ String lastBuildStatus = GetterUtil.getString(request.getAttribute("LAST_BUILD_S
 
 String image = "brokenbuild";
 String failingTestDiv = StringPool.BLANK;
+String cssClass = "top";
 
 if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
 	image = "waiting";
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
 	image = "everythingisok";
+
+	cssClass = "bottom";
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 	image = "failingtestprincipal";
@@ -48,7 +51,9 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 }
 %>
 
-<div class="logo-container">
+<div class="logo-container <%= cssClass %>">
+	<span class="label label-inverse"><%= jobName %></span>
+
 	<img class="statusLogo" src="<%= request.getContextPath() %>/images/<%= image %>.png" />
 	<%= failingTestDiv %>
 </div>
