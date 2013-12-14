@@ -21,15 +21,13 @@ String lastBuildStatus = GetterUtil.getString(request.getAttribute("LAST_BUILD_S
 
 String image = "brokenbuild";
 String failingTestDiv = StringPool.BLANK;
-String cssClass = "top";
+String cssClass = "bottom";
 
 if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
 	image = "waiting";
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS)) {
 	image = "everythingisok";
-
-	cssClass = "bottom";
 }
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 	image = "failingtestprincipal";
@@ -48,6 +46,8 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 	sb.append("</span>");
 
 	failingTestDiv = sb.toString();
+
+	cssClass = "top";
 }
 %>
 
