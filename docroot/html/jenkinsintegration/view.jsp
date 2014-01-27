@@ -14,7 +14,6 @@
  */
 --%>
 
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@ include file="/html/init.jsp" %>
 
 <%
