@@ -49,14 +49,6 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 					<%@ include file="builds.jspf" %>
 				</c:when>
 				<c:when test="<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_LIGHTS) %>">
-					<c:if test="<%= !themeDisplay.isStatePopUp() %>">
-						<h3>
-							<liferay-ui:icon target="_blank" url="<%= HtmlUtil.escape(jobURL) %>">
-								<liferay-ui:message key="current-build-status-for" /> <%= HtmlUtil.escape(jobName) %>
-							</liferay-ui:icon>
-						</h3>
-					</c:if>
-
 					<%@ include file="lights.jspf" %>
 				</c:when>
 				<c:otherwise>
