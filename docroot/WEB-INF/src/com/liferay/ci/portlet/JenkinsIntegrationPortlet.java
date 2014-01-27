@@ -69,7 +69,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) {
 				buildSeries(request);
 			}
-			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_LIGHTS) {
+			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS) {
 				buildLights(request);
 			}
 		}

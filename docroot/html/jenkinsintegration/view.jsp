@@ -47,7 +47,7 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 
 					<%@ include file="builds.jspf" %>
 				</c:when>
-				<c:when test="<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_LIGHTS) %>">
+				<c:when test="<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS)%>">
 					<%@ include file="lights.jspf" %>
 				</c:when>
 				<c:otherwise>
