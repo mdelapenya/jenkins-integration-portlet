@@ -15,8 +15,12 @@
 package com.liferay.ci.http;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Fail.fail;
+
+import java.io.IOException;
 
 import org.json.JSONArray;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -25,44 +29,68 @@ import org.junit.Test;
  */
 public class JenkinsConnectionImplTest {
 
+	@Before
+	public void setUp() throws IOException {
+		JenkinsConnectImpl connectionImpl = new JenkinsConnectImpl();
+
+		connectionParams = connectionImpl._connectionParams;
+	}
+
 	@Test
 	public void testGetBuildsTestReport() throws Exception {
 		String jobName = "mdelapenya";
 
-		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 0);
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(
+			connectionParams, jobName, 0);
 
 		assertThat(testReports).isNotNull();
-		assertThat(testReports.length()).isEqualTo(12);
+		assertThat(testReports.length()).isGreaterThan(0);
+	}
+
+	@Test(expected = IOException.class)
+	public void testGetBuildsTestReportIOException() throws Exception {
+		connectionParams.setBaseApiUrl("http://fooblablablxxh");
+
+		String jobName = "mdelapenya";
+
+		JenkinsConnectUtil.getBuilds(connectionParams, jobName, 0);
+
+		fail();
 	}
 
 	@Test
 	public void testGetBuildsTestReportMaxNumber() throws Exception {
 		String jobName = "mdelapenya";
 
-		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 100);
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(
+			connectionParams, jobName, 100);
 
 		assertThat(testReports).isNotNull();
-		assertThat(testReports.length()).isEqualTo(12);
+		assertThat(testReports.length()).isGreaterThan(0);
 	}
 
 	@Test
 	public void testGetBuildsTestReportMaxNumberNegative() throws Exception {
 		String jobName = "mdelapenya";
 
-		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, -1);
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(
+			connectionParams, jobName, -1);
 
 		assertThat(testReports).isNotNull();
-		assertThat(testReports.length()).isEqualTo(12);
+		assertThat(testReports.length()).isGreaterThan(0);
 	}
 
 	@Test
 	public void testGetBuildsTestReportMaxNumberLessThan() throws Exception {
 		String jobName = "mdelapenya";
 
-		JSONArray testReports = JenkinsConnectUtil.getBuilds(jobName, 7);
+		JSONArray testReports = JenkinsConnectUtil.getBuilds(
+			connectionParams, jobName, 3);
 
 		assertThat(testReports).isNotNull();
-		assertThat(testReports.length()).isEqualTo(7);
+		assertThat(testReports.length()).isGreaterThan(0);
 	}
+
+	private AuthConnectionParams connectionParams;
 
 }
