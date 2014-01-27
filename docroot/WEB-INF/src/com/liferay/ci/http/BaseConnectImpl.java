@@ -46,14 +46,36 @@ public abstract class BaseConnectImpl {
 			properties.load(is);
 		}
 
-		user = properties.getProperty("user");
-		password = properties.getProperty("password");
+		String user = properties.getProperty("user");
+		String password = properties.getProperty("password");
+		String baseApiURL = properties.getProperty("baseapiurl");
 
-		setBaseAPIURL(properties.getProperty("baseapiurl"));
+		_connectionParams = new AuthConnectionParams(
+			password, baseApiURL, user);
 	}
 
-	protected InputStream connect(String apiURL) throws IOException {
-		URL url = new URL(apiURL);
+	protected InputStream connect(
+			AuthConnectionParams authParams, String urlSuffix,
+			boolean appendUrlPrefix)
+		throws IOException {
+
+		if (authParams != null) {
+			_connectionParams = authParams;
+		}
+
+		String user = _connectionParams.getUser();
+		String password = _connectionParams.getPassword();
+
+		String connectionURL = "";
+
+		if (appendUrlPrefix) {
+			connectionURL += authParams.getBaseApiUrl();
+		}
+
+		connectionURL += urlSuffix;
+
+		URL url = new URL(connectionURL);
+
 		URLConnection uc = url.openConnection();
 
 		String userpass = user + " : " + password;
@@ -62,7 +84,8 @@ public abstract class BaseConnectImpl {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(
-					user, password.toCharArray());
+					_connectionParams.getUser(),
+					_connectionParams.getPassword().toCharArray());
 			}
 		});
 	
@@ -74,14 +97,6 @@ public abstract class BaseConnectImpl {
 		return uc.getInputStream();
 	}
 
-	protected void setAuthConfiguration(String newUser, String newPassword) {
-		user = newUser;
-		password = newPassword;
-	}
-
-	protected abstract void setBaseAPIURL(String baseApiURL);
-
-	private static String user;
-	private static String password;
+	protected AuthConnectionParams _connectionParams;
 
 }
