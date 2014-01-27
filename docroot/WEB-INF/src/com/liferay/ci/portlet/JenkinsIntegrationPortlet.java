@@ -24,6 +24,7 @@ import javax.portlet.RenderResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.liferay.ci.http.AuthConnectionParams;
 import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.ci.jenkins.cache.LiferayJenkinsBuildCache;
 import com.liferay.portal.kernel.log.Log;
@@ -85,9 +86,12 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 		_log.debug("Getting builds for " + jobName);
 
+		AuthConnectionParams connectionParams = getConnectionParams(
+			portletPreferences);
+
 		try {
 			String lastBuildStatus = JenkinsConnectUtil.getLastBuildStatus(
-				jobName);
+				connectionParams, jobName);
 
 			request.setAttribute("LAST_BUILD_STATUS", lastBuildStatus);
 
@@ -98,7 +102,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 				// retrieve number of broken tests for last build
 
 				JSONArray testResults = JenkinsConnectUtil.getBuilds(
-					jobName, 1);
+					connectionParams, jobName, 1);
 
 				request.setAttribute("TEST_RESULTS", testResults);
 			}
@@ -141,7 +145,8 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 			if (!_cache.containsKey(portletId, jobCacheKey)) {
 				JSONArray testResults = JenkinsConnectUtil.getBuilds(
-					jobName, maxBuildNumber);
+					getConnectionParams(portletPreferences), jobName,
+					maxBuildNumber);
 
 				_cache.put(portletId, jobCacheKey, testResults);
 			}
@@ -157,6 +162,19 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		catch (JSONException e) {
 			_log.error("The job is not well-formed", e);
 		}
+	}
+
+	protected AuthConnectionParams getConnectionParams(
+		PortletPreferences portletPreferences) {
+
+		String user = portletPreferences.getValue(
+			"username", StringPool.BLANK);
+		String password = portletPreferences.getValue(
+			"password", StringPool.BLANK);
+		String url = portletPreferences.getValue(
+			"baseapiurl", StringPool.BLANK);
+
+		return new AuthConnectionParams(password, url, user);
 	}
 
 	private static LiferayJenkinsBuildCache _cache;
