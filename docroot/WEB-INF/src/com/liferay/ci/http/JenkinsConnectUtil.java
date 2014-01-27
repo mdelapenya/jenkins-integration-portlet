@@ -31,10 +31,12 @@ import com.liferay.portal.kernel.util.StringPool;
  */
 public class JenkinsConnectUtil {
 
-	public static JSONArray getBuilds(String jobName, int maxNumber)
+	public static JSONArray getBuilds(
+			AuthConnectionParams connectionParams, String jobName,
+			int maxNumber)
 		throws IOException, JSONException {
 
-		JSONObject json = getJob(jobName);
+		JSONObject json = getJob(connectionParams, jobName);
 
 		JSONArray builds = (JSONArray)json.get("builds");
 
@@ -50,7 +52,9 @@ public class JenkinsConnectUtil {
 			JSONObject build = (JSONObject)builds.get(i);
 
 			try {
-				JSONObject testReport = getBuildTestReport(build);
+				JSONObject testReport = getBuildTestReport(
+					connectionParams, build);
+
 				testReport.append("buildNumber", build.getInt("number"));
 
 				result.put(testReport);
@@ -65,17 +69,18 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static String getLastBuildStatus(String jobName)
+	public static String getLastBuildStatus(
+			AuthConnectionParams connectionParams, String jobName)
 		throws IOException, JSONException {
 
-		JSONObject json = getJob(jobName);
+		JSONObject json = getJob(connectionParams, jobName);
 
 		JSONObject build = (JSONObject)json.get("lastBuild");
 
 		String result = StringPool.BLANK;
 
 		try {
-			result = getService().getLastBuildStatus(build);
+			result = getService(connectionParams).getLastBuildStatus(build);
 		}
 		catch(FileNotFoundException fnfe) {
 			_log.warn(
@@ -86,37 +91,32 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static void setAuthConfiguration(String user, String password)
-		throws IOException {
-
-		getService().setAuthConfiguration(user, password);
-	}
-
-	public static void setJenkinsBaseApiURL(String baseApiURL)
-		throws IOException {
-
-		getService().setBaseAPIURL(baseApiURL);
-	}
-
 	private JenkinsConnectUtil() {
 	}
 
-	private static JSONObject getBuildTestReport(JSONObject build)
+	private static JSONObject getBuildTestReport(
+			AuthConnectionParams connectionParams, JSONObject build)
 		throws IOException, JSONException {
 
-		return getService().getBuildTestReport(build);
+		return getService(connectionParams).getBuildTestReport(build);
 	}
 
-	private static JSONObject getJob(String jobName)
+	private static JSONObject getJob(
+			AuthConnectionParams connectionParams, String jobName)
 		throws IOException, JSONException {
 
-		return getService().getJob(jobName);
+		return getService(connectionParams).getJob(jobName);
 	}
 
-	private static JenkinsConnectImpl getService() throws IOException {
+	private static JenkinsConnectImpl getService(
+			AuthConnectionParams connectionParams)
+		throws IOException {
+
 		if (_service == null) {
 			_service = new JenkinsConnectImpl();
 		}
+
+		_service.setAuthConnectionParams(connectionParams);
 
 		return _service;
 	}

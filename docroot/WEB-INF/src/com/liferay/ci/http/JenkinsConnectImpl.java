@@ -33,20 +33,12 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 		_apiURLSuffix = "api/json";
 	}
 
-	public String getAPIURLSuffix() {
-		return _apiURLSuffix;
-	}
-
-	public String getBaseAPIURL() {
-		return _baseAPIURL;
-	}
-
 	public JSONObject getBuildTestReport(JSONObject build)
 		throws IOException, JSONException {
 
 		String buildURL = (String)build.get("url");
 
-		return _get(buildURL + "testReport/" + _apiURLSuffix);
+		return _get(buildURL + "testReport/" + _apiURLSuffix, false);
 	}
 
 	public String getLastBuildStatus(JSONObject build)
@@ -54,36 +46,40 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 
 		String buildURL = (String)build.get("url");
 
-		JSONObject buildResult = _get(buildURL + _apiURLSuffix);
+		JSONObject buildResult = _get(buildURL + _apiURLSuffix, false);
 
 		Object result = buildResult.get("result");
 
 		return String.valueOf(result);
 	}
 
-	public JSONObject getJob(String jobName)
-		throws IOException, JSONException {
-
-		return _get(getJobAPIURL(jobName));
+	public JSONObject getJob(String jobName) throws IOException, JSONException {
+		return _get(getJobAPIURLSuffix(jobName));
 	}
 
-	public String getJobAPIURL(String jobName) {
-		return getBaseAPIURL() + "/job/" + jobName + "/" + getAPIURLSuffix();
+	protected String getJobAPIURLSuffix(String jobName) {
+		return "/job/" + jobName + "/" + _apiURLSuffix;
 	}
 
 	public void setAPIURLSuffix(String apiURLSuffix) {
 		_apiURLSuffix = apiURLSuffix;
 	}
 
-	protected void setBaseAPIURL(String baseApiURL) {
-		_baseAPIURL = baseApiURL;
+	public void setAuthConnectionParams(AuthConnectionParams connectionParams) {
+		_connectionParams = connectionParams;
 	}
 
 	private JSONObject _get(String apiURL) throws IOException, JSONException {
-		return JSONReaderImpl.readJSONFromURL(connect(apiURL));
+		return _get(apiURL, true);
+	}
+
+	private JSONObject _get(String apiURL, boolean appendBaseURL)
+		throws IOException, JSONException {
+
+		return JSONReaderImpl.readJSONFromURL(
+			connect(_connectionParams, apiURL, appendBaseURL));
 	}
 
 	private static String _apiURLSuffix;
-	private static String _baseAPIURL;
 
 }

@@ -17,9 +17,7 @@ package com.liferay.ci.jenkins.action;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 
-import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,33 +38,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (Validator.isNull(baseAPIURL)) {
 			SessionErrors.add(actionRequest, "baseApiURLError");
 		}
-		else {
-			// change base API URL
-
-			JenkinsConnectUtil.setJenkinsBaseApiURL(baseAPIURL);
-		}
 
 		String user = getParameter(actionRequest, "username");
 		String password = getParameter(actionRequest, "password");
 
+		if (Validator.isNull(user) || Validator.isNull(password)) {
+			SessionErrors.add(actionRequest, "httpAuthError");
+		}
+
 		super.processAction(portletConfig, actionRequest, actionResponse);
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
-		if (Validator.isNotNull(user) && Validator.isNotNull(password)) {
-			// reset http connect configuration
-
-			JenkinsConnectUtil.setAuthConfiguration(user, password);
-		}
-		else {
-			preferences.reset("username");
-		}
-
-		// this is needed to reset unused preferences
-
-		preferences.reset("password");
-
-		preferences.store();
 	}
 
 }
