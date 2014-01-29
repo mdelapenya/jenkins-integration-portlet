@@ -57,11 +57,13 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 	</c:choose>
 </div>
 
-<aui:script use="aui-base">
-	setTimeout(
-		function(){
-			Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
-		},
-		<%= timeout %>
-	);
-</aui:script>
+<c:if test="<%= Validator.isNull(jobName) %>">
+	<aui:script use="aui-base">
+		setTimeout(
+			function(){
+				Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
+			},
+			<%= timeout %>
+		);
+	</aui:script>
+</c:if>
