@@ -51,7 +51,7 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 	</c:choose>
 </div>
 
-<c:if test="<%= Validator.isNull(jobName) %>">
+<c:if test="<%= Validator.isNotNull(jobName) %>">
 	<aui:script use="aui-base">
 		setTimeout(
 			function(){
