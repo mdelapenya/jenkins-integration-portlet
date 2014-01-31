@@ -75,7 +75,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS) {
 				buildLights(request);
 			}
-			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK) {
+			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_JOBS_STACK) {
 				buildProjectsStack(request);
 			}
 		}
@@ -125,11 +125,11 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 	protected void buildProjectsStack(RenderRequest request) {
 		PortletPreferences portletPreferences = request.getPreferences();
 
-		String projectNamesParam = portletPreferences.getValue(
-			"projectnames", StringPool.BLANK);
+		String jobNamesParam = portletPreferences.getValue(
+			"jobnames", StringPool.BLANK);
 
-		String[] projectNames = StringUtil.split(
-			projectNamesParam, StringPool.NEW_LINE);
+		String[] jobNames = StringUtil.split(
+			jobNamesParam, StringPool.NEW_LINE);
 
 		AuthConnectionParams connectionParams = getConnectionParams(
 			portletPreferences);
@@ -137,7 +137,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		try {
 			JenkinsJob[] lastBuildStatuses =
 				JenkinsConnectUtil.getLastBuildStatuses(
-					connectionParams, projectNames);
+					connectionParams, jobNames);
 
 			request.setAttribute("JENKINS_JOBS", lastBuildStatuses);
 		}
