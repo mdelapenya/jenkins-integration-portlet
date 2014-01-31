@@ -40,6 +40,8 @@ String passedCountColor = GetterUtil.getString(portletPreferences.getValue("pass
 String skippedCountColor = GetterUtil.getString(portletPreferences.getValue("skippedcountcolor", JenkinsIntegrationConstants.DEFAULT_SKIPPED_COLOR));
 String failedCountColor = GetterUtil.getString(portletPreferences.getValue("failedcountcolor", JenkinsIntegrationConstants.DEFAULT_FAILED_COLOR));
 String totalCountColor = GetterUtil.getString(portletPreferences.getValue("totalcountcolor", JenkinsIntegrationConstants.DEFAULT_TOTAL_COLOR));
+
+String projectNames = GetterUtil.getString(portletPreferences.getValue("projectnames", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -71,7 +73,12 @@ String totalCountColor = GetterUtil.getString(portletPreferences.getValue("total
 		<aui:select id="preferences--viewmode--" label="view-mode" name="preferences--viewmode--">
 			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>' label="series-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_SERIES %>" />
 			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS)%>' label="traffic-lights-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS%>" />
+			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK)%>' label="projects-stack-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK%>" />
 		</aui:select>
+
+		<aui:panel label="projects-stack-view-mode">
+			<aui:input id="preferences--projectnames--" label="project-names" name="preferences--projectnames--" resizable="true" type="textarea" value="<%= projectNames %>" />
+		</aui:panel>
 
 		<aui:panel label="series-view-mode">
 			<aui:select id="preferences--buildsnumber--" label="number-of-builds-to-view" name="preferences--buildsnumber--">
