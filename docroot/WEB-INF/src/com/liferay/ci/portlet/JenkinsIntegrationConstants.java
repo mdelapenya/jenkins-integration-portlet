@@ -36,6 +36,8 @@ public class JenkinsIntegrationConstants {
 
 	public static final String JENKINS_BUILD_STATUS_UNSTABLE = "UNSTABLE";
 
+	public static final int VIEW_MODE_PROJECTS_STACK = 3;
+
 	public static final int VIEW_MODE_SERIES = 1;
 
 	public static final int VIEW_MODE_TRAFFIC_LIGHTS = 2;
