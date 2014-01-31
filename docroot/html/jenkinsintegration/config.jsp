@@ -41,7 +41,7 @@ String skippedCountColor = GetterUtil.getString(portletPreferences.getValue("ski
 String failedCountColor = GetterUtil.getString(portletPreferences.getValue("failedcountcolor", JenkinsIntegrationConstants.DEFAULT_FAILED_COLOR));
 String totalCountColor = GetterUtil.getString(portletPreferences.getValue("totalcountcolor", JenkinsIntegrationConstants.DEFAULT_TOTAL_COLOR));
 
-String projectNames = GetterUtil.getString(portletPreferences.getValue("projectnames", null));
+String jobNames = GetterUtil.getString(portletPreferences.getValue("jobnames", null));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="actionURL" />
@@ -73,11 +73,11 @@ String projectNames = GetterUtil.getString(portletPreferences.getValue("projectn
 		<aui:select id="preferences--viewmode--" label="view-mode" name="preferences--viewmode--">
 			<aui:option selected='<%= (viewMode == JenkinsIntegrationConstants.VIEW_MODE_SERIES) %>' label="series-view-mode" value="<%= JenkinsIntegrationConstants.VIEW_MODE_SERIES %>" />
 			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS)%>' label="traffic-lights-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS%>" />
-			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK)%>' label="projects-stack-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK%>" />
+			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_JOBS_STACK)%>' label="jobs-stack-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_JOBS_STACK%>" />
 		</aui:select>
 
-		<aui:panel label="projects-stack-view-mode">
-			<aui:input id="preferences--projectnames--" label="project-names" name="preferences--projectnames--" resizable="true" type="textarea" value="<%= projectNames %>" />
+		<aui:panel label="jobs-stack-view-mode">
+			<aui:input id="preferences--jobnames--" label="job-names" name="preferences--jobnames--" resizable="true" type="textarea" value="<%= jobNames %>" />
 		</aui:panel>
 
 		<aui:panel label="series-view-mode">
