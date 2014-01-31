@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.liferay.ci.jenkins.vo.JenkinsJob;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -86,6 +87,24 @@ public class JenkinsConnectUtil {
 			_log.warn(
 				"The build " + build.getInt("number") + " is not present",
 				fnfe);
+		}
+
+		return result;
+	}
+
+	public static JenkinsJob[] getLastBuildStatuses(
+			AuthConnectionParams connectionParams, String... jobNames)
+		throws IOException, JSONException {
+
+		JenkinsJob[] result = new JenkinsJob[jobNames.length];
+
+		for (int i = 0; i < jobNames.length; i++) {
+			String jobName = jobNames[i];
+
+			String lastBuildStatus = getLastBuildStatus(
+				connectionParams, jobName);
+
+			result[i] = new JenkinsJob(jobName, lastBuildStatus);
 		}
 
 		return result;

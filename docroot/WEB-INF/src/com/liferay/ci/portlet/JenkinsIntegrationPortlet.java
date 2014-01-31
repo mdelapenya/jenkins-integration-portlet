@@ -27,11 +27,13 @@ import org.json.JSONException;
 import com.liferay.ci.http.AuthConnectionParams;
 import com.liferay.ci.http.JenkinsConnectUtil;
 import com.liferay.ci.jenkins.cache.LiferayJenkinsBuildCache;
+import com.liferay.ci.jenkins.vo.JenkinsJob;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -72,6 +74,9 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			}
 			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_TRAFFIC_LIGHTS) {
 				buildLights(request);
+			}
+			else if (viewMode == JenkinsIntegrationConstants.VIEW_MODE_PROJECTS_STACK) {
+				buildProjectsStack(request);
 			}
 		}
 
@@ -114,6 +119,35 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 		}
 		catch (JSONException e) {
 			_log.error("The job is not well-formed", e);
+		}
+	}
+
+	protected void buildProjectsStack(RenderRequest request) {
+		PortletPreferences portletPreferences = request.getPreferences();
+
+		String projectNamesParam = portletPreferences.getValue(
+			"projectnames", StringPool.BLANK);
+
+		String[] projectNames = StringUtil.split(
+			projectNamesParam, StringPool.NEW_LINE);
+
+		AuthConnectionParams connectionParams = getConnectionParams(
+			portletPreferences);
+
+		try {
+			JenkinsJob[] lastBuildStatuses =
+				JenkinsConnectUtil.getLastBuildStatuses(
+					connectionParams, projectNames);
+
+			request.setAttribute("JENKINS_JOBS", lastBuildStatuses);
+		}
+		catch (IOException ioe) {
+			SessionErrors.add(request, ioe.getClass());
+
+			_log.error("The jobs were not available", ioe);
+		}
+		catch (JSONException e) {
+			_log.error("The jobs are not well-formed", e);
 		}
 	}
 
