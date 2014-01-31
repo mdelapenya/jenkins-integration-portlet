@@ -17,9 +17,11 @@ package com.liferay.ci.jenkins.action;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -47,6 +49,14 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
+
+		String base64EncodedPassword = Base64.encode(password.getBytes());
+
+		PortletPreferences preferences =  actionRequest.getPreferences();
+
+		preferences.setValue("password", base64EncodedPassword);
+
+		preferences.store();
 	}
 
 }

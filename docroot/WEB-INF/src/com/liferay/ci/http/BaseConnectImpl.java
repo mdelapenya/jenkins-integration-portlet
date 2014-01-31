@@ -24,6 +24,8 @@ import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.liferay.portal.kernel.util.Base64;
+
 /**
  * 
  * @author Manuel de la Peña
@@ -78,19 +80,24 @@ public abstract class BaseConnectImpl {
 
 		URLConnection uc = url.openConnection();
 
-		String userpass = user + " : " + password;
+		String userpass = user + " : " + new String(Base64.decode(password));
+
+		String encodedUserPass = new String(Base64.encode(userpass.getBytes()));
 
 		Authenticator.setDefault(new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
+				String decodedPassword = new String(
+					Base64.decode(_connectionParams.getPassword()));
+
 				return new PasswordAuthentication(
 					_connectionParams.getUser(),
-					_connectionParams.getPassword().toCharArray());
+					decodedPassword.toCharArray());
 			}
 		});
 	
 		String basicAuth = "Basic " + DatatypeConverter.printBase64Binary(
-			userpass.getBytes());
+			encodedUserPass.getBytes());
 
 		uc.setRequestProperty ("Authorization", basicAuth);
 
