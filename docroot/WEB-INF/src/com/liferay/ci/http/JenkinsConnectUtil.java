@@ -16,6 +16,7 @@ package com.liferay.ci.http;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,6 +107,10 @@ public class JenkinsConnectUtil {
 
 			result[i] = new JenkinsJob(jobName, lastBuildStatus);
 		}
+
+		// sort jobs by status
+
+		Arrays.sort(result);
 
 		return result;
 	}
