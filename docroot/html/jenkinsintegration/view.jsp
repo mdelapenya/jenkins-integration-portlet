@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.ci.jenkins.action.ConfigurationValidator"%>
 <%@ include file="/html/init.jsp" %>
 
 <%
@@ -23,11 +24,13 @@ String jobURL = baseApiURL + "/job/" + jobName;
 long timeout = GetterUtil.getLong(portletPreferences.getValue("timeout", String.valueOf(JenkinsIntegrationConstants.DEFAULT_TIMEOUT)));
 
 int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
+
+boolean configured = ConfigurationValidator.isConfigured(portletPreferences);
 %>
 
 <div>
 	<c:choose>
-		<c:when test="<%= Validator.isNull(jobName) %>">
+		<c:when test="<%= !configured %>">
 			<div class="alert alert-warn">
 				<span class="displaying-help-message-holder">
 					<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
@@ -54,7 +57,7 @@ int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", Str
 	</c:choose>
 </div>
 
-<c:if test="<%= Validator.isNotNull(jobName) %>">
+<c:if test="<%= configured %>">
 	<aui:script use="aui-base">
 		setTimeout(
 			function(){
