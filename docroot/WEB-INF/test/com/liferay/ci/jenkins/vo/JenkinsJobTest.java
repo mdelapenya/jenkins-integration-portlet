@@ -143,6 +143,36 @@ public class JenkinsJobTest {
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 	}
 
+	@Test
+	public void testCompare6() {
+		JenkinsJob successJob1 = new JenkinsJob(
+			"successJob1",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+
+		JenkinsJob successJob2 = new JenkinsJob("successJob2", 
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+
+		JenkinsJob[] sortedJobs = sort(successJob1, successJob2);
+
+		assertThat(sortedJobs[0].getJobName()).isEqualTo("successJob1");
+		assertThat(sortedJobs[1].getJobName()).isEqualTo("successJob2");
+	}
+
+	@Test
+	public void testCompare7() {
+		JenkinsJob successJob1 = new JenkinsJob(
+			"successJob1",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+
+		JenkinsJob successJob2 = new JenkinsJob("successJob2", 
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+
+		JenkinsJob[] sortedJobs = sort(successJob2, successJob1);
+
+		assertThat(sortedJobs[0].getJobName()).isEqualTo("successJob1");
+		assertThat(sortedJobs[1].getJobName()).isEqualTo("successJob2");
+	}
+
 	protected JenkinsJob[] sort(JenkinsJob... jobs) {
 		Arrays.sort(jobs);
 

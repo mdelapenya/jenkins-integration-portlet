@@ -51,7 +51,7 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 			return 1;
 		}
 		else if (this.internalLastBuildStatus == that.internalLastBuildStatus) {
-			return 0;
+			return (this.jobName.compareTo(that.jobName));
 		}
 		else {
 			return -1;
