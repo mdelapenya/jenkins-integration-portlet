@@ -26,6 +26,7 @@ import org.json.JSONException;
 
 import com.liferay.ci.http.AuthConnectionParams;
 import com.liferay.ci.http.JenkinsConnectUtil;
+import com.liferay.ci.jenkins.action.ConfigurationValidator;
 import com.liferay.ci.jenkins.cache.LiferayJenkinsBuildCache;
 import com.liferay.ci.jenkins.vo.JenkinsJob;
 import com.liferay.portal.kernel.log.Log;
@@ -61,10 +62,10 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 		PortletPreferences portletPreferences = request.getPreferences();
 
-		String jobName = portletPreferences.getValue(
-			"jobname", StringPool.BLANK);
+		boolean configured = ConfigurationValidator.isConfigured(
+			portletPreferences);
 
-		if (!Validator.isNull(jobName)) {
+		if (configured) {
 			int viewMode = GetterUtil.getInteger(
 				portletPreferences.getValue("viewmode", null),
 				JenkinsIntegrationConstants.VIEW_MODE_SERIES);
