@@ -63,6 +63,12 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 	}
 
 	public String getLastBuildStatus() {
+		if (lastBuildStatus.equals(
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
+
+			return JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_PENDING;
+		}
+
 		return lastBuildStatus;
 	}
 
