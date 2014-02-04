@@ -3,7 +3,58 @@
 		font-size: 1em;
 	}
 
-	.logo-container {
+	.jobs-wrapper {
+		.job-wrapper {
+			display: table;
+			font-size: 1em;
+			padding: 5px;
+			width: 100%;
+
+			div {
+				border: 1px solid #EAEAEA;
+				color: white;
+				margin: 0;
+				padding-bottom: 10px;
+				padding-left: 7px;
+				padding-right: 7px;
+				padding-top: 10px;
+				width: 100%;
+			}
+
+			.job-name {
+				color: rgb(85, 85, 85);
+				float: left;
+				font-size: 1.5em;
+				font-weight: bold;
+				max-width: 62%;
+			}
+
+			.job-status {
+				float: right;
+				font-weight: bold;
+				max-width: 32%;
+				text-align: center;
+			}
+
+			.failure {
+				background-color: red;
+			}
+
+			.pending {
+				background-color: blue;
+			}
+
+			.success {
+				background-color: green;
+			}
+
+			.unstable {
+				background-color: orange;
+			}
+		}
+	}
+
+.logo-container {
 		position: relative;
 
 		.fail-count {
