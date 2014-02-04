@@ -23,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.liferay.ci.jenkins.vo.JenkinsJob;
+import com.liferay.ci.jenkins.vo.JenkinsUnstableJob;
+import com.liferay.ci.portlet.JenkinsIntegrationConstants;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -105,7 +107,21 @@ public class JenkinsConnectUtil {
 			String lastBuildStatus = getLastBuildStatus(
 				connectionParams, jobName);
 
-			result[i] = new JenkinsJob(jobName, lastBuildStatus);
+			if (lastBuildStatus.equals(
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
+
+				// retrieve number of broken tests for last build
+
+				JSONArray testResults = getBuilds(connectionParams, jobName, 1);
+
+				JSONObject testResult = (JSONObject)testResults.get(0);
+
+				result[i] = new JenkinsUnstableJob(
+					jobName, lastBuildStatus, testResult.getInt("failCount"));
+			}
+			else {
+				result[i] = new JenkinsJob(jobName, lastBuildStatus);
+			}
 		}
 
 		// sort jobs by status
