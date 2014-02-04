@@ -3,7 +3,7 @@
 
 <display>
 	
-	<category name="category.sample">
+	<category name="category.dev.tools">
 		<portlet id="jenkinsintegrationportlet"></portlet>
 	</category>
 </display>
