@@ -18,12 +18,21 @@
 
 <%
 JenkinsJob[] jenkinsJobs = (JenkinsJob[])GetterUtil.getObject(request.getAttribute("JENKINS_JOBS"), new JenkinsJob[0]);
+%>
 
+<div class="jobs-wrapper">
+<%
 for (JenkinsJob jenkinsJob : jenkinsJobs) {
 %>
-	<ul>
-		<li><%= jenkinsJob.getJobName() %> - <%= jenkinsJob.getLastBuildStatus() %> </li>
-	</ul>
+	<div class="job-wrapper">
+		<div class="job-name">
+			<%= jenkinsJob.getJobName() %>
+		</div>
+		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %>">
+			<%= jenkinsJob.getLastBuildStatus() %>
+		</div>
+	</div>
 <%
 }
 %>
+</div>
