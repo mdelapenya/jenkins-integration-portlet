@@ -40,8 +40,13 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 
 			internalLastBuildStatus = -2;
 		}
-		else {
+		else if (lastBuildStatus.equals(
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED)) {
+
 			internalLastBuildStatus = -3;
+		}
+		else {
+			internalLastBuildStatus = -4;
 		}
 	}
 
