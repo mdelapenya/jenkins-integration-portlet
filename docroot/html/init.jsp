@@ -24,6 +24,7 @@
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@page import="com.liferay.ci.jenkins.vo.JenkinsJob"%>
+<%@page import="com.liferay.ci.jenkins.vo.JenkinsUnstableJob"%>
 <%@page import="com.liferay.ci.json.JSONUtil"%>
 <%@page import="com.liferay.ci.portlet.JenkinsIntegrationConstants"%>
 
