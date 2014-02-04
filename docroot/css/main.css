@@ -30,10 +30,16 @@
 			}
 
 			.job-status {
+				border-radius: 10px;
 				float: right;
 				font-weight: bold;
 				max-width: 32%;
 				text-align: center;
+			}
+
+			.aborted {
+				background-color: #EAEAEA;
+				color: #3e3e3e;
 			}
 
 			.failure {
@@ -50,6 +56,7 @@
 
 			.unstable {
 				background-color: orange;
+				color: #3e3e3e;
 			}
 		}
 	}
