@@ -14,6 +14,7 @@
 
 package com.liferay.ci.jenkins.vo;
 
+import com.liferay.ci.jenkins.processor.JenkinsJobNameProcessorUtil;
 import com.liferay.ci.portlet.JenkinsIntegrationConstants;
 
 /**
@@ -64,7 +65,12 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 	}
 
 	public String getJobName() {
-		return jobName;
+		try {
+			return JenkinsJobNameProcessorUtil.process(jobName);
+		}
+		catch (Exception e) {
+			return jobName;
+		}
 	}
 
 	public String getLastBuildStatus() {
