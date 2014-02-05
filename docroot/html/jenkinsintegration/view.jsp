@@ -14,7 +14,6 @@
  */
 --%>
 
-<%@page import="com.liferay.ci.jenkins.action.ConfigurationValidator"%>
 <%@ include file="/html/init.jsp" %>
 
 <%
