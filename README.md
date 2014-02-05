@@ -25,6 +25,7 @@ There is a properties files under 'docroot/WEB-INF/src/com/liferay/ci/http' name
 
 * Supports a new different display mode: jobs stack, where you can define multiple jobs that will be displayed in a stack, ordered by last build status
 * Each portlet instance holds its basic authentication, because the portlet could be configured to be connected to different systems
+* Supports processing job names by a custom processor: i.e. removing dashes from job names
 * Fix minor bugs
 
 ## v.1.1.0
