@@ -36,6 +36,8 @@
 <%@page import="com.liferay.portal.kernel.util.StringBundler"%>
 <%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="com.liferay.portal.security.permission.ActionKeys"%>
+<%@page import="com.liferay.portal.service.permission.PortletPermissionUtil"%>
 
 <%@page import="java.io.FileNotFoundException"%>
 
