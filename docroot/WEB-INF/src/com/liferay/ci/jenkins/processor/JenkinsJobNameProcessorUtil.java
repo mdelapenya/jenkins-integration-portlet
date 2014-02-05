@@ -14,6 +14,9 @@
 
 package com.liferay.ci.jenkins.processor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.liferay.ci.jenkins.util.PortletPropsValues;
 
 /**
@@ -23,14 +26,24 @@ public class JenkinsJobNameProcessorUtil {
 
 	public static JenkinsJobNameProcessor getProcessor() throws Exception {
 		if (_processor == null) {
-			_initializeProcessor();
+			_initialize();
 		}
 
 		return _processor;
 	}
 
 	public static String process(String jobName) throws Exception {
-		return getProcessor().process(jobName);
+		if (!_initialized) {
+			_initialize();
+		}
+
+		if (!_processedJobNames.containsKey(jobName)) {
+			String processedJobName = getProcessor().process(jobName);
+
+			_processedJobNames.put(jobName, processedJobName);
+		}
+
+		return _processedJobNames.get(jobName);
 	}
 
 	public static void setProcessor(JenkinsJobNameProcessor processor) {
@@ -40,7 +53,9 @@ public class JenkinsJobNameProcessorUtil {
 	private JenkinsJobNameProcessorUtil() {
 	}
 
-	private static void _initializeProcessor() throws Exception {
+	private static void _initialize() throws Exception {
+		_processedJobNames = new HashMap<String, String>();
+
 		String processorClassName =
 			PortletPropsValues.JOB_NAME_PROCESSOR_CLASSNAME;
 
@@ -50,8 +65,14 @@ public class JenkinsJobNameProcessorUtil {
 		Class<?> clazz = classLoader.loadClass(processorClassName);
 
 		_processor = (AbstractJenkinsJobNameProcessor)clazz.newInstance();
+
+		_initialized = true;
 	}
 
+	private static Map<String, String> _processedJobNames;
+
 	private static JenkinsJobNameProcessor _processor;
+
+	private static boolean _initialized;
 
 }
