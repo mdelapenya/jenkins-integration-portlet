@@ -26,6 +26,8 @@ long timeout = GetterUtil.getLong(portletPreferences.getValue("timeout", String.
 int viewMode = GetterUtil.getInteger(portletPreferences.getValue("viewmode", String.valueOf(JenkinsIntegrationConstants.VIEW_MODE_SERIES)));
 
 boolean configured = ConfigurationValidator.isConfigured(portletPreferences);
+
+boolean hasConfigurationPermission = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
 %>
 
 <div>
@@ -33,7 +35,16 @@ boolean configured = ConfigurationValidator.isConfigured(portletPreferences);
 		<c:when test="<%= !configured %>">
 			<div class="alert alert-warn">
 				<span class="displaying-help-message-holder">
-					<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
+					<c:choose>
+						<c:when test="<%= hasConfigurationPermission %>">
+							<a href="<%= portletDisplay.getURLConfiguration() %>" onClick="<%= portletDisplay.getURLConfigurationJS() %>">
+								<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
+							</a>
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:message key="please-configure-this-portlet-to-display-jenkins-build-information" />
+						</c:otherwise>
+					</c:choose>
 				</span>
 			</div>
 		</c:when>
