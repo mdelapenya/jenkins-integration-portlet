@@ -22,7 +22,7 @@
 			}
 
 			.job-name {
-				color: rgb(85, 85, 85);
+				color: #555555;
 				float: left;
 				font-size: 1.5em;
 				font-weight: bold;
@@ -42,19 +42,19 @@
 			}
 
 			.failure {
-				background-color: red;
+				background-color: #DC143C;
 			}
 
 			.pending {
-				background-color: blue;
+				background-color: #4682B4;
 			}
 
 			.success {
-				background-color: green;
+				background-color: #2E8B22;
 			}
 
 			.unstable {
-				background-color: orange;
+				background-color: #FF8C00;
 				color: #3e3e3e;
 			}
 		}
