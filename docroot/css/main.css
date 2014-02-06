@@ -38,8 +38,7 @@
 			}
 
 			.aborted {
-				background-color: #EAEAEA;
-				color: #3e3e3e;
+				background-color: #cc3366;
 			}
 
 			.failure {
