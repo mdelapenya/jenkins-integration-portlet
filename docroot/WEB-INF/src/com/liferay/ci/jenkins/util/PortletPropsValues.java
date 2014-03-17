@@ -22,6 +22,18 @@ import com.liferay.util.portlet.PortletProps;
  */
 public class PortletPropsValues {
 
+	public static final String HTTP_BASIC_AUTH_PASSWORD =
+		GetterUtil.getString(PortletProps.get(
+			PortletPropsKeys.HTTP_BASIC_AUTH_PASSWORD));
+
+	public static final String HTTP_BASIC_AUTH_USER =
+		GetterUtil.getString(PortletProps.get(
+			PortletPropsKeys.HTTP_BASIC_AUTH_USER));
+
+	public static final String JENKINS_BASE_API_URL =
+		GetterUtil.getString(PortletProps.get(
+			PortletPropsKeys.JENKINS_BASE_API_URL));
+
 	public static final String JOB_NAME_PROCESSOR_CLASSNAME =
 		GetterUtil.getString(
 			PortletProps.get(PortletPropsKeys.JOB_NAME_PROCESSOR_CLASSNAME));
