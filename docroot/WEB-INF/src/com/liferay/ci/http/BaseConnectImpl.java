@@ -20,10 +20,10 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.liferay.ci.jenkins.util.PortletPropsValues;
 import com.liferay.portal.kernel.util.Base64;
 
 /**
@@ -35,22 +35,9 @@ public abstract class BaseConnectImpl {
 	public BaseConnectImpl() throws IOException {
 		super();
 
-		InputStream is = getClass().getResourceAsStream(
-			"connection.properties");
-
-		Properties properties = new Properties();
-		properties.load(is);
-
-		is = getClass().getResourceAsStream(
-			"connection-ext.properties");
-
-		if (is != null) {
-			properties.load(is);
-		}
-
-		String user = properties.getProperty("user");
-		String password = properties.getProperty("password");
-		String baseApiURL = properties.getProperty("baseapiurl");
+		String user = PortletPropsValues.HTTP_BASIC_AUTH_USER;
+		String password = PortletPropsValues.HTTP_BASIC_AUTH_PASSWORD;
+		String baseApiURL = PortletPropsValues.JENKINS_BASE_API_URL;
 
 		_connectionParams = new AuthConnectionParams(
 			password, baseApiURL, user);
