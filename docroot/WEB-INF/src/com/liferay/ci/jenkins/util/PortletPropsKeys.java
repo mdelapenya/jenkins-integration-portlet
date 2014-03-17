@@ -19,6 +19,16 @@ package com.liferay.ci.jenkins.util;
  */
 public class PortletPropsKeys {
 
-	public static final String JOB_NAME_PROCESSOR_CLASSNAME = "job.name.processor.classname";
+	public static final String HTTP_BASIC_AUTH_PASSWORD =
+		"http.basic.auth.password";
+
+	public static final String HTTP_BASIC_AUTH_USER =
+		"http.basic.auth.user";
+
+	public static final String JENKINS_BASE_API_URL =
+		"jenkins.baseapiurl";
+
+	public static final String JOB_NAME_PROCESSOR_CLASSNAME =
+		"job.name.processor.classname";
 
 }
