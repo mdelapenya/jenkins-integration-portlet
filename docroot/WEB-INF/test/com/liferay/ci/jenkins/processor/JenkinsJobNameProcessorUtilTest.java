@@ -46,4 +46,20 @@ public class JenkinsJobNameProcessorUtilTest {
 		assertThat(actualJobName).isEqualTo("job name with dashes");
 	}
 
+	@Test
+	public void testProcessWithDashesAndLiferay() throws Exception {
+		String actualJobName = JenkinsJobNameProcessorUtil.process(
+			"liferay-job-name-with-no-dashes");
+
+		assertThat(actualJobName).isEqualTo("jobnamewithnodashes");
+	}
+
+	@Test
+	public void testProcessWithLiferay() throws Exception {
+		String actualJobName = JenkinsJobNameProcessorUtil.process(
+			"liferayjobnamewithnodashes");
+
+		assertThat(actualJobName).isEqualTo("jobnamewithnodashes");
+	}
+
 }
