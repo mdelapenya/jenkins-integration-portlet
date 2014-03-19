@@ -15,6 +15,7 @@
 package com.liferay.ci.jenkins.processor;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Manuel de la Peña
@@ -24,14 +25,16 @@ public class DefaultJobNameProcessorImpl extends
 
 	@Override
 	public String process(String jobName) {
-		if (!jobName.contains(StringPool.DASH)) {
-			return jobName;
+		if (Validator.isNull(jobName)) {
+			return StringPool.BLANK;
 		}
 
-		String processedJobName = jobName.replace(
+		String processedJobName = jobName.replace("liferay", StringPool.BLANK);
+
+		processedJobName = processedJobName.replace(
 			StringPool.DASH, StringPool.SPACE);
 
-		return processedJobName;
+		return processedJobName.trim();
 	}
 
 }
