@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,13 +32,9 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 	image = "failingtestprincipal";
 
-	JSONArray testResults = (JSONArray)request.getAttribute("TEST_RESULTS");
+	JenkinsBuild testResults = (JenkinsBuild)request.getAttribute("TEST_RESULTS");
 
-	JSONObject testResult = (JSONObject)testResults.get(0);
-
-	JSONArray category = (JSONArray)testResult.get("buildNumber");
-
-	int failCount = testResult.getInt("failCount");
+	int failCount = testResults.getFailedTests();
 
 	StringBundler sb = new StringBundler();
 	sb.append("<span class='fail-count'>");
@@ -58,7 +54,7 @@ else if (lastBuildStatus.equals(JenkinsIntegrationConstants.JENKINS_BUILD_STATUS
 	<%= failingTestDiv %>
 </div>
 
-<liferay-portlet:renderURL var="renderURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>" >
+<liferay-portlet:renderURL var="renderURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 </liferay-portlet:renderURL>
 
 <c:if test="<%= !themeDisplay.isStatePopUp() %>">
