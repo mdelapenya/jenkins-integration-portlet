@@ -97,20 +97,19 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			portletPreferences);
 
 		try {
-			JenkinsBuild lastBuildStatus =
-				JenkinsConnectUtil.getLastBuild(
+			JenkinsBuild lastBuild = JenkinsConnectUtil.getLastBuild(
 					connectionParams, jobName);
 
 			request.setAttribute(
-				"LAST_BUILD_STATUS", lastBuildStatus.getStatus());
+				"LAST_BUILD_STATUS", lastBuild.getStatus());
 
-			if (lastBuildStatus.getStatus().equals(
+			if (lastBuild.getStatus().equals(
 					JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)
 				) {
 
 				// retrieve number of broken tests for last build
 
-				request.setAttribute("TEST_RESULTS", lastBuildStatus);
+				request.setAttribute("TEST_RESULTS", lastBuild);
 			}
 		}
 		catch (IOException ioe) {
@@ -136,10 +135,10 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			portletPreferences);
 
 		try {
-			JenkinsJob[] lastBuildStatuses =
+			JenkinsJob[] lastBuilds =
 				JenkinsConnectUtil.getLastBuilds(connectionParams, jobNames);
 
-			request.setAttribute("JENKINS_JOBS", lastBuildStatuses);
+			request.setAttribute("JENKINS_JOBS", lastBuilds);
 		}
 		catch (IOException ioe) {
 			SessionErrors.add(request, ioe.getClass());
