@@ -15,7 +15,11 @@
 package com.liferay.ci.http;
 
 import java.io.IOException;
+import java.net.URL;
 
+import com.liferay.ci.jenkins.vo.JenkinsBuild;
+import com.liferay.ci.jenkins.vo.JenkinsUnstableJob;
+import com.liferay.ci.portlet.JenkinsIntegrationConstants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +42,13 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 
 		String buildURL = (String)build.get("url");
 
-		return _get(buildURL + "testReport/" + _apiURLSuffix, false);
+		return getBuildTestReport(buildURL);
+	}
+
+	public JSONObject getBuildTestReport(String url)
+		throws IOException, JSONException {
+
+		return _get(url + "testReport/" + _apiURLSuffix, false);
 	}
 
 	public String getLastBuildStatus(JSONObject build)
