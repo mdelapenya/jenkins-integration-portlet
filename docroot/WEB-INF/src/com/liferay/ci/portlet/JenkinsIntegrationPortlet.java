@@ -98,7 +98,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 		try {
 			JenkinsBuild lastBuildStatus =
-				JenkinsConnectUtil.getLastBuildStatus(
+				JenkinsConnectUtil.getLastBuild(
 					connectionParams, jobName);
 
 			request.setAttribute(
@@ -137,8 +137,7 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 
 		try {
 			JenkinsJob[] lastBuildStatuses =
-				JenkinsConnectUtil.getLastBuildStatuses(
-					connectionParams, jobNames);
+				JenkinsConnectUtil.getLastBuilds(connectionParams, jobNames);
 
 			request.setAttribute("JENKINS_JOBS", lastBuildStatuses);
 		}

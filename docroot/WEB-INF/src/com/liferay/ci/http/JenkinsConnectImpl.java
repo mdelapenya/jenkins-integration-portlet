@@ -51,7 +51,7 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 		return _get(url + "testReport/" + _apiURLSuffix, false);
 	}
 
-	public JenkinsBuild getLastBuildStatus(JSONObject build)
+	public JenkinsBuild getLastBuild(JSONObject build)
 		throws IOException, JSONException {
 
 		String buildURL = (String)build.get("url");
