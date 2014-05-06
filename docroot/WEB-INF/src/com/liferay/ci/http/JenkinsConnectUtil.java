@@ -73,8 +73,8 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static JenkinsBuild getLastBuildStatus(
-		AuthConnectionParams connectionParams, String jobName)
+	public static JenkinsBuild getLastBuild(
+			AuthConnectionParams connectionParams, String jobName)
 		throws IOException, JSONException {
 
 		JSONObject json = getJob(connectionParams, jobName);
@@ -84,7 +84,7 @@ public class JenkinsConnectUtil {
 		JenkinsBuild result = null;
 
 		try {
-			result = getService(connectionParams).getLastBuildStatus(build);
+			result = getService(connectionParams).getLastBuild(build);
 		}
 		catch(FileNotFoundException fnfe) {
 			_log.warn(
@@ -95,7 +95,7 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static JenkinsJob[] getLastBuildStatuses(
+	public static JenkinsJob[] getLastBuilds(
 			AuthConnectionParams connectionParams, String... jobNames)
 		throws IOException, JSONException {
 
@@ -104,7 +104,7 @@ public class JenkinsConnectUtil {
 		for (int i = 0; i < jobNames.length; i++) {
 			String jobName = jobNames[i];
 
-			JenkinsBuild lastBuildStatus = getLastBuildStatus(
+			JenkinsBuild lastBuildStatus = getLastBuild(
 				connectionParams, jobName);
 
 			if (lastBuildStatus.getStatus().equals(
