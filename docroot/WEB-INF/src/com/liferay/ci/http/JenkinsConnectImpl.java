@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,14 +15,18 @@
 package com.liferay.ci.http;
 
 import java.io.IOException;
+import java.net.URL;
 
+import com.liferay.ci.jenkins.vo.JenkinsBuild;
+import com.liferay.ci.jenkins.vo.JenkinsUnstableJob;
+import com.liferay.ci.portlet.JenkinsIntegrationConstants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.liferay.ci.json.JSONReaderImpl;
 
 /**
- * 
+ *
  * @author Manuel de la Peña
  */
 public class JenkinsConnectImpl extends BaseConnectImpl {
@@ -38,19 +42,66 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 
 		String buildURL = (String)build.get("url");
 
-		return _get(buildURL + "testReport/" + _apiURLSuffix, false);
+		return getBuildTestReport(buildURL);
 	}
 
-	public String getLastBuildStatus(JSONObject build)
+	public JSONObject getBuildTestReport(String url)
+		throws IOException, JSONException {
+
+		return _get(url + "testReport/" + _apiURLSuffix, false);
+	}
+
+	public JenkinsBuild getLastBuild(JSONObject build)
 		throws IOException, JSONException {
 
 		String buildURL = (String)build.get("url");
+
+		int buildNumber = build.getInt("number");
+
+		JenkinsBuild jenkinsBuild = new JenkinsBuild(
+			buildNumber, new URL(buildURL));
 
 		JSONObject buildResult = _get(buildURL + _apiURLSuffix, false);
 
 		Object result = buildResult.get("result");
 
-		return String.valueOf(result);
+		String resultString = String.valueOf(result);
+
+		if (resultString.equals(
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
+
+			int previusBuildNumber = buildNumber - 1;
+
+			buildURL = buildURL.replace
+				(String.valueOf(buildNumber),
+					String.valueOf(previusBuildNumber));
+
+			buildNumber = previusBuildNumber;
+
+			buildResult = _get(buildURL + _apiURLSuffix, false);
+
+			result = buildResult.get("result");
+
+			resultString = String.valueOf(result);
+		}
+
+		if (resultString.equals(
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
+
+			JSONObject buildTestReport = getBuildTestReport(buildURL);
+
+			// retrieve number of broken tests for last build
+
+			int failedTests = buildTestReport.getInt("failCount");
+
+			jenkinsBuild.setFailedTests(failedTests);
+		}
+
+		jenkinsBuild.setNumber(buildNumber);
+		jenkinsBuild.setStatus(resultString);
+		jenkinsBuild.setUrl(new URL(buildURL));
+
+		return jenkinsBuild;
 	}
 
 	public JSONObject getJob(String jobName) throws IOException, JSONException {

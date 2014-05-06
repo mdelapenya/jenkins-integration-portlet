@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,15 +22,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.liferay.ci.jenkins.vo.JenkinsBuild;
 import com.liferay.ci.jenkins.vo.JenkinsJob;
 import com.liferay.ci.jenkins.vo.JenkinsUnstableJob;
 import com.liferay.ci.portlet.JenkinsIntegrationConstants;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * 
+ *
  * @author Manuel de la Peña
  */
 public class JenkinsConnectUtil {
@@ -73,7 +73,7 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static String getLastBuildStatus(
+	public static JenkinsBuild getLastBuild(
 			AuthConnectionParams connectionParams, String jobName)
 		throws IOException, JSONException {
 
@@ -81,10 +81,10 @@ public class JenkinsConnectUtil {
 
 		JSONObject build = (JSONObject)json.get("lastBuild");
 
-		String result = StringPool.BLANK;
+		JenkinsBuild result = null;
 
 		try {
-			result = getService(connectionParams).getLastBuildStatus(build);
+			result = getService(connectionParams).getLastBuild(build);
 		}
 		catch(FileNotFoundException fnfe) {
 			_log.warn(
@@ -95,7 +95,7 @@ public class JenkinsConnectUtil {
 		return result;
 	}
 
-	public static JenkinsJob[] getLastBuildStatuses(
+	public static JenkinsJob[] getLastBuilds(
 			AuthConnectionParams connectionParams, String... jobNames)
 		throws IOException, JSONException {
 
@@ -104,23 +104,16 @@ public class JenkinsConnectUtil {
 		for (int i = 0; i < jobNames.length; i++) {
 			String jobName = jobNames[i];
 
-			String lastBuildStatus = getLastBuildStatus(
-				connectionParams, jobName);
+			JenkinsBuild lastBuild = getLastBuild(connectionParams, jobName);
 
-			if (lastBuildStatus.equals(
+			if (lastBuild.getStatus().equals(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 
-				// retrieve number of broken tests for last build
-
-				JSONArray testResults = getBuilds(connectionParams, jobName, 1);
-
-				JSONObject testResult = (JSONObject)testResults.get(0);
-
 				result[i] = new JenkinsUnstableJob(
-					jobName, lastBuildStatus, testResult.getInt("failCount"));
+					jobName, lastBuild.getStatus(), lastBuild.getFailedTests());
 			}
 			else {
-				result[i] = new JenkinsJob(jobName, lastBuildStatus);
+				result[i] = new JenkinsJob(jobName, lastBuild.getStatus());
 			}
 		}
 
