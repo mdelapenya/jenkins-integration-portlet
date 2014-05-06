@@ -21,6 +21,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.ci.jenkins.vo.JenkinsBuild;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -96,21 +97,20 @@ public class JenkinsIntegrationPortlet extends MVCPortlet {
 			portletPreferences);
 
 		try {
-			String lastBuildStatus = JenkinsConnectUtil.getLastBuildStatus(
-				connectionParams, jobName);
+			JenkinsBuild lastBuildStatus =
+				JenkinsConnectUtil.getLastBuildStatus(
+					connectionParams, jobName);
 
-			request.setAttribute("LAST_BUILD_STATUS", lastBuildStatus);
+			request.setAttribute(
+				"LAST_BUILD_STATUS", lastBuildStatus.getStatus());
 
-			if (lastBuildStatus.equals(
+			if (lastBuildStatus.getStatus().equals(
 					JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)
 				) {
 
 				// retrieve number of broken tests for last build
 
-				JSONArray testResults = JenkinsConnectUtil.getBuilds(
-					connectionParams, jobName, 1);
-
-				request.setAttribute("TEST_RESULTS", testResults);
+				request.setAttribute("TEST_RESULTS", lastBuildStatus);
 			}
 		}
 		catch (IOException ioe) {
