@@ -76,6 +76,12 @@ String jobNames = GetterUtil.getString(portletPreferences.getValue("jobnames", n
 			<aui:option selected='<%=(viewMode == JenkinsIntegrationConstants.VIEW_MODE_JOBS_STACK)%>' label="jobs-stack-view-mode" value="<%=JenkinsIntegrationConstants.VIEW_MODE_JOBS_STACK%>" />
 		</aui:select>
 
+        <div class="alert alert-info">
+			<span class="displaying-help-message-holder">
+				<liferay-ui:message key="you-can-define-here-job-names-using-an-alias" />
+			</span>
+		</div>
+
 		<aui:panel label="jobs-stack-view-mode">
 			<aui:input id="preferences--jobnames--" label="job-names" name="preferences--jobnames--" resizable="true" type="textarea" value="<%= jobNames %>" />
 		</aui:panel>
