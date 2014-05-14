@@ -30,10 +30,11 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare1() {
 		JenkinsJob unstableJob = new JenkinsJob(
-			"unstableJob",
+			"unstableJobName", "unstableJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob",
+		JenkinsJob failedJob = new JenkinsJob(
+			"failedJobName", "failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
@@ -50,10 +51,11 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare2() {
 		JenkinsJob unstableJob = new JenkinsJob(
-			"unstableJob",
+			"unstableJobName", "unstableJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob",
+		JenkinsJob failedJob = new JenkinsJob(
+			"failedJobName", "failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
@@ -70,10 +72,11 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare3() {
 		JenkinsJob successJob = new JenkinsJob(
-			"successJob",
+			"successJobName", "successJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob", 
+		JenkinsJob failedJob = new JenkinsJob(
+			"failedJobName", "failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(failedJob, successJob);
@@ -89,14 +92,15 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare4() {
 		JenkinsJob successJob = new JenkinsJob(
-			"successJob",
+			"successJobName", "successJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
 		JenkinsJob unstableJob = new JenkinsJob(
-			"unstableJob",
+			"unstableJobName", "unstableJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob", 
+		JenkinsJob failedJob = new JenkinsJob(
+			"failedJobName", "failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(failedJob, successJob, unstableJob);
@@ -115,16 +119,19 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare5() {
 		JenkinsJob successJob = new JenkinsJob(
-			"successJob",
+			"successJobName", "successJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob abortedJob = new JenkinsJob("abortedJob",
+		JenkinsJob abortedJob = new JenkinsJob(
+			"abortedJobName", "abortedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED);
 
-		JenkinsJob unstableJob = new JenkinsJob("unstableJob", 
+		JenkinsJob unstableJob = new JenkinsJob(
+			"unstableJobName", "unstableJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob", 
+		JenkinsJob failedJob = new JenkinsJob(
+			"failedJobName", "failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
@@ -147,10 +154,11 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare6() {
 		JenkinsJob successJob1 = new JenkinsJob(
-			"successJob1",
+			"successJobName1", "successJob1",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob successJob2 = new JenkinsJob("successJob2", 
+		JenkinsJob successJob2 = new JenkinsJob(
+			"successJobName2", "successJob2",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
 		JenkinsJob[] sortedJobs = sort(successJob1, successJob2);
@@ -162,10 +170,11 @@ public class JenkinsJobTest {
 	@Test
 	public void testCompare7() {
 		JenkinsJob successJob1 = new JenkinsJob(
-			"successJob1",
+			"successJobName1", "successJob1",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob successJob2 = new JenkinsJob("successJob2", 
+		JenkinsJob successJob2 = new JenkinsJob(
+			"successJobName2", "successJob2",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
 		JenkinsJob[] sortedJobs = sort(successJob2, successJob1);

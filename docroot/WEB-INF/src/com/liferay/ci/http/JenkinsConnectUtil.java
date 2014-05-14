@@ -107,7 +107,18 @@ public class JenkinsConnectUtil {
 		JenkinsJob[] result = new JenkinsJob[jobNames.length];
 
 		for (int i = 0; i < jobNames.length; i++) {
-			String jobName = jobNames[i];
+			String fullJobName = jobNames[i];
+
+			String[] jobNameArray = fullJobName.split("|");
+
+			if (jobNameArray.length < 2) {
+				_log.warn("Job name uses invalidad format: " + fullJobName);
+
+				continue;
+			}
+
+			String jobName = jobNameArray[0];
+			String jobAlias = jobNameArray[1];
 
 			JenkinsBuild lastBuild = getLastBuild(connectionParams, jobName);
 
@@ -115,10 +126,12 @@ public class JenkinsConnectUtil {
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 
 				result[i] = new JenkinsUnstableJob(
-					jobName, lastBuild.getStatus(), lastBuild.getFailedTests());
+					jobName, jobAlias, lastBuild.getStatus(),
+					lastBuild.getFailedTests());
 			}
 			else {
-				result[i] = new JenkinsJob(jobName, lastBuild.getStatus());
+				result[i] = new JenkinsJob(
+					jobName, jobAlias, lastBuild.getStatus());
 			}
 		}
 
