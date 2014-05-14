@@ -22,7 +22,8 @@ import com.liferay.ci.portlet.JenkinsIntegrationConstants;
  */
 public class JenkinsJob implements Comparable<JenkinsJob>{
 
-	public JenkinsJob(String jobName, String lastBuildStatus) {
+	public JenkinsJob(String jobName, String alias, String lastBuildStatus) {
+		this.jobAlias = alias;
 		this.jobName = jobName;
 		this.lastBuildStatus = lastBuildStatus;
 
@@ -59,6 +60,10 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 		}
 	}
 
+	public String getJobAlias() {
+		return jobAlias;
+	}
+
 	public String getJobName() {
 		try {
 			return JenkinsJobNameProcessorUtil.process(jobName);
@@ -73,6 +78,7 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 	}
 
 	private int internalLastBuildStatus;
+	private String jobAlias;
 	private String jobName;
 	private String lastBuildStatus;
 
