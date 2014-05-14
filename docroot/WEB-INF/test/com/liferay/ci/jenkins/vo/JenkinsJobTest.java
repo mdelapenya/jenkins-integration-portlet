@@ -29,42 +29,42 @@ public class JenkinsJobTest {
 
 	@Test
 	public void testCompare1() {
-		JenkinsJob pendingJob = new JenkinsJob(
-			"pendingJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+		JenkinsJob unstableJob = new JenkinsJob(
+			"unstableJob",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob", 
+		JenkinsJob failedJob = new JenkinsJob("failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
-			new JenkinsJob[] {pendingJob, failedJob});
+			new JenkinsJob[] {unstableJob, failedJob});
 
 		assertThat(
 			sortedJobs[0].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 		assertThat(
 			sortedJobs[1].getLastBuildStatus()).isEqualTo(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 	}
 
 	@Test
 	public void testCompare2() {
-		JenkinsJob pendingJob = new JenkinsJob(
-			"pendingJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+		JenkinsJob unstableJob = new JenkinsJob(
+			"unstableJob",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
-		JenkinsJob failedJob = new JenkinsJob("failedJob", 
+		JenkinsJob failedJob = new JenkinsJob("failedJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
-			new JenkinsJob[] {failedJob, pendingJob});
+			new JenkinsJob[] {failedJob, unstableJob});
 
 		assertThat(
 			sortedJobs[0].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 		assertThat(
 			sortedJobs[1].getLastBuildStatus()).isEqualTo(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 	}
 
 	@Test
@@ -92,20 +92,21 @@ public class JenkinsJobTest {
 			"successJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob pendingJob = new JenkinsJob("pendingJob", 
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+		JenkinsJob unstableJob = new JenkinsJob(
+			"unstableJob",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 
 		JenkinsJob failedJob = new JenkinsJob("failedJob", 
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
-		JenkinsJob[] sortedJobs = sort(failedJob, successJob, pendingJob);
+		JenkinsJob[] sortedJobs = sort(failedJob, successJob, unstableJob);
 
 		assertThat(
 			sortedJobs[0].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 		assertThat(
 			sortedJobs[1].getLastBuildStatus()).isEqualTo(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 		assertThat(
 			sortedJobs[2].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
@@ -117,8 +118,8 @@ public class JenkinsJobTest {
 			"successJob",
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
 
-		JenkinsJob pendingJob = new JenkinsJob("pendingJob", 
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+		JenkinsJob abortedJob = new JenkinsJob("abortedJob",
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED);
 
 		JenkinsJob unstableJob = new JenkinsJob("unstableJob", 
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
@@ -127,17 +128,17 @@ public class JenkinsJobTest {
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 
 		JenkinsJob[] sortedJobs = sort(
-			successJob, pendingJob, unstableJob, failedJob);
+			successJob, abortedJob, unstableJob, failedJob);
 
 		assertThat(
 			sortedJobs[0].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
 		assertThat(
 			sortedJobs[1].getLastBuildStatus()).isEqualTo(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED);
 		assertThat(
 			sortedJobs[2].getLastBuildStatus()).isEqualTo(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL);
+				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
 		assertThat(
 			sortedJobs[3].getLastBuildStatus()).isEqualTo(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
