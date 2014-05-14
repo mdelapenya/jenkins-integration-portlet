@@ -32,11 +32,6 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 			internalLastBuildStatus = 0;
 		}
 		else if (lastBuildStatus.equals(
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
-
-			internalLastBuildStatus = -1;
-		}
-		else if (lastBuildStatus.equals(
 			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 
 			internalLastBuildStatus = -2;
@@ -74,12 +69,6 @@ public class JenkinsJob implements Comparable<JenkinsJob>{
 	}
 
 	public String getLastBuildStatus() {
-		if (lastBuildStatus.equals(
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
-
-			return JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_PENDING;
-		}
-
 		return lastBuildStatus;
 	}
 
