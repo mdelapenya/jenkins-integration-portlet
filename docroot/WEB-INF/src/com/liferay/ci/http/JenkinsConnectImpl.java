@@ -68,24 +68,6 @@ public class JenkinsConnectImpl extends BaseConnectImpl {
 		String resultString = String.valueOf(result);
 
 		if (resultString.equals(
-				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_NULL)) {
-
-			int previusBuildNumber = buildNumber - 1;
-
-			buildURL = buildURL.replace
-				(String.valueOf(buildNumber),
-					String.valueOf(previusBuildNumber));
-
-			buildNumber = previusBuildNumber;
-
-			buildResult = _get(buildURL + _apiURLSuffix, false);
-
-			result = buildResult.get("result");
-
-			resultString = String.valueOf(result);
-		}
-
-		if (resultString.equals(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 
 			JSONObject buildTestReport = getBuildTestReport(buildURL);

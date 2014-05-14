@@ -79,16 +79,21 @@ public class JenkinsConnectUtil {
 
 		JSONObject json = getJob(connectionParams, jobName);
 
-		JSONObject build = (JSONObject)json.get("lastBuild");
+		JSONObject lastCompletedBuild = (JSONObject)json.get(
+			"lastCompletedBuild");
+		JSONObject lastFailedBuild = (JSONObject)json.get(
+			"lastFailedBuild");
+
+		JSONObject lastBuild = getPreviousBuild(lastCompletedBuild, lastFailedBuild);
 
 		JenkinsBuild result = null;
 
 		try {
-			result = getService(connectionParams).getLastBuild(build);
+			result = getService(connectionParams).getLastBuild(lastBuild);
 		}
 		catch(FileNotFoundException fnfe) {
 			_log.warn(
-				"The build " + build.getInt("number") + " is not present",
+				"The build " + lastBuild.getInt("number") + " is not present",
 				fnfe);
 		}
 
@@ -139,6 +144,20 @@ public class JenkinsConnectUtil {
 		throws IOException, JSONException {
 
 		return getService(connectionParams).getJob(jobName);
+	}
+
+	private static JSONObject getPreviousBuild(
+			JSONObject lastCompleted, JSONObject lastFailed)
+		throws JSONException {
+
+		int lastCompletedBuildNumber = lastCompleted.getInt("number");
+		int lastFailedBuildNumber  = lastFailed.getInt("number");
+
+		if (lastCompletedBuildNumber > lastFailedBuildNumber) {
+			return lastCompleted;
+		}
+
+		return lastFailed;
 	}
 
 	private static JenkinsConnectImpl getService(
