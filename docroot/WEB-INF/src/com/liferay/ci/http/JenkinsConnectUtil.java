@@ -111,14 +111,23 @@ public class JenkinsConnectUtil {
 
 			String[] jobNameArray = fullJobName.split("\\|");
 
-			if (jobNameArray.length != 2) {
+			String jobName;
+			String jobAlias;
+
+			if (jobNameArray.length > 2) {
 				_log.warn("Job name uses invalidad format: " + fullJobName);
 
 				continue;
 			}
+			else if (jobNameArray.length == 2) {
+				jobName = jobNameArray[0];
+				jobAlias = jobNameArray[1];
+			}
+			else {
+				jobName = fullJobName;
+				jobAlias = fullJobName;
+			}
 
-			String jobName = jobNameArray[0];
-			String jobAlias = jobNameArray[1];
 
 			JenkinsBuild lastBuild = getLastBuild(connectionParams, jobName);
 
