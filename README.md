@@ -21,6 +21,11 @@ Below there are some screenshots of the current portlet, contributed by my UX fr
 
 There is a properties files under 'docroot/WEB-INF/src' named *portlet.properties*. This file contains some properties with empty values for connecting to your Jenkins server, even if it is under a web server with Basic Authentication. You can extend that file with the *-ext* name convention, creating a *portlet-ext.properties*, where you will put custom values for your application, using a Base64 encoding for your password.
 
+## v.1.3.0
+* Supports saving a very basic way to define aliases for builds, using this pattern: JOB_NAME|JOB_ALIAS. This way long named builds can be shorten by an alias.
+* Do not display PENDING status, displaying previous build result instead.
+* Fix minor bugs
+
 ## v.1.2.0
 
 * Supports a new different display mode: jobs stack, where you can define multiple jobs that will be displayed in a stack, ordered by last build status
