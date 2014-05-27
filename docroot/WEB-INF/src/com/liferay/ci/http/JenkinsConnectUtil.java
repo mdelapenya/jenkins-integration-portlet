@@ -109,9 +109,9 @@ public class JenkinsConnectUtil {
 		for (int i = 0; i < jobNames.length; i++) {
 			String fullJobName = jobNames[i];
 
-			String[] jobNameArray = fullJobName.split("|");
+			String[] jobNameArray = fullJobName.split("\\|");
 
-			if (jobNameArray.length < 2) {
+			if (jobNameArray.length != 2) {
 				_log.warn("Job name uses invalidad format: " + fullJobName);
 
 				continue;
