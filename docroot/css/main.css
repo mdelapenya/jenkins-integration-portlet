@@ -4,12 +4,14 @@
 	}
 
 	.jobs-wrapper {
+		width: 100%;
+
 		.job-wrapper {
 			display: table;
 			font-size: 1em;
+			width: 100%;
 
 			div {
-				border: 1px solid #EAEAEA;
 				color: white;
 				margin: 0;
 			}
