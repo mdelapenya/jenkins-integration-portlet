@@ -20,7 +20,7 @@
 JenkinsJob[] jenkinsJobs = (JenkinsJob[])GetterUtil.getObject(request.getAttribute("JENKINS_JOBS"), new JenkinsJob[0]);
 %>
 
-<div class="jobs-wrapper">
+<div class="jobs-wrapper container-fluid">
 <%
 for (JenkinsJob jenkinsJob : jenkinsJobs) {
 	String status = jenkinsJob.getLastBuildStatus();
@@ -29,11 +29,11 @@ for (JenkinsJob jenkinsJob : jenkinsJobs) {
 		status += " (" + ((JenkinsUnstableJob)jenkinsJob).getFailedTestCount() +")";
 	}
 %>
-	<div class="job-wrapper">
-		<div class="job-name">
+	<div class="job-wrapper row">
+		<div class="job-name span7">
 			<%= jenkinsJob.getJobAlias() %>
 		</div>
-		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %>">
+		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %> span5">
 			<%= status %>
 		</div>
 	</div>
