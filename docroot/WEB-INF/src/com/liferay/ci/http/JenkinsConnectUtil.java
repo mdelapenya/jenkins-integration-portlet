@@ -86,11 +86,9 @@ public class JenkinsConnectUtil {
 
 		// last failed build
 
-		Object lastFailed = json.get("lastFailedBuild");
-
 		JSONObject lastFailedBuild = null;
 
-		if (lastFailed != null) {
+		if (!json.isNull("lastFailedBuild")) {
 			lastFailedBuild = (JSONObject)json.get("lastFailedBuild");
 		}
 
