@@ -79,10 +79,20 @@ public class JenkinsConnectUtil {
 
 		JSONObject json = getJob(connectionParams, jobName);
 
+		// last completed build
+
 		JSONObject lastCompletedBuild = (JSONObject)json.get(
 			"lastCompletedBuild");
-		JSONObject lastFailedBuild = (JSONObject)json.get(
-			"lastFailedBuild");
+
+		// last failed build
+
+		Object lastFailed = json.get("lastFailedBuild");
+
+		JSONObject lastFailedBuild = null;
+
+		if (lastFailed != null) {
+			lastFailedBuild = (JSONObject)json.get("lastFailedBuild");
+		}
 
 		JSONObject lastBuild = getPreviousBuild(lastCompletedBuild, lastFailedBuild);
 
@@ -173,7 +183,11 @@ public class JenkinsConnectUtil {
 		throws JSONException {
 
 		int lastCompletedBuildNumber = lastCompleted.getInt("number");
-		int lastFailedBuildNumber  = lastFailed.getInt("number");
+		int lastFailedBuildNumber  = 0;
+
+		if (lastFailed != null) {
+			lastFailedBuildNumber = lastFailed.getInt("number");
+		}
 
 		if (lastCompletedBuildNumber > lastFailedBuildNumber) {
 			return lastCompleted;
