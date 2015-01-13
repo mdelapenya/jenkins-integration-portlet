@@ -29,11 +29,11 @@ for (JenkinsJob jenkinsJob : jenkinsJobs) {
 		status += " (" + ((JenkinsUnstableJob)jenkinsJob).getFailedTestCount() +")";
 	}
 %>
-	<div class="job-wrapper row">
-		<div class="job-name span7">
+	<div class="job-wrapper row-fluid">
+		<div class="job-name span7 text-left">
 			<%= jenkinsJob.getJobAlias() %>
 		</div>
-		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %> span5">
+		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %> span5 text-center">
 			<%= status %>
 		</div>
 	</div>
