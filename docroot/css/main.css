@@ -4,8 +4,6 @@
 	}
 
 	.jobs-wrapper {
-		width: 100%;
-
 		.job-wrapper {
 			display: table;
 			font-size: 1em;
@@ -25,7 +23,6 @@
 			.job-status {
 				border-radius: 10px;
 				font-weight: bold;
-				text-align: center;
 			}
 
 			.aborted {
