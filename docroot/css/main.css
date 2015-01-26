@@ -53,13 +53,12 @@
 		position: relative;
 
 		.fail-count {
-			bottom: 10px;
+			bottom: 0.35em;
 			color: #503700;
 			font-family: "HelveticaNeueMedium", "HelveticaNeue-Medium", "Helvetica Neue Medium", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
 			font-stretch: normal;
-			font-size: 15vw;
-			left: 10px;
-			line-height: 360px;
+			font-size: 9vw;
+			left: 2px;
 			position: absolute;
 			width: 100%;
 		}
