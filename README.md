@@ -21,6 +21,9 @@ Below there are some screenshots of the current portlet, contributed by my UX fr
 
 There is a properties files under 'docroot/WEB-INF/src' named *portlet.properties*. This file contains some properties with empty values for connecting to your Jenkins server, even if it is under a web server with Basic Authentication. You can extend that file with the *-ext* name convention, creating a *portlet-ext.properties*, where you will put custom values for your application, using a Base64 encoding for your password.
 
+## v.1.4.0
+* Add a link to the Jenkins build on each item in the builds list of Stack mode
+
 ## v.1.3.1
 * Apply Bootstrap fluid styles
 * Minor look&feel fixes
