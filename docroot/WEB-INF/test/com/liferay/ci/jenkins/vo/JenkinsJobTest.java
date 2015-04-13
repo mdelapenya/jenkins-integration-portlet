@@ -31,11 +31,13 @@ public class JenkinsJobTest {
 	public void testCompare1() {
 		JenkinsJob unstableJob = new JenkinsJob(
 			"unstableJobName", "unstableJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE,
+			_BUILD_URL);
 
 		JenkinsJob failedJob = new JenkinsJob(
 			"failedJobName", "failedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(
 			new JenkinsJob[] {unstableJob, failedJob});
@@ -52,11 +54,13 @@ public class JenkinsJobTest {
 	public void testCompare2() {
 		JenkinsJob unstableJob = new JenkinsJob(
 			"unstableJobName", "unstableJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE,
+			_BUILD_URL);
 
 		JenkinsJob failedJob = new JenkinsJob(
 			"failedJobName", "failedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(
 			new JenkinsJob[] {failedJob, unstableJob});
@@ -73,11 +77,13 @@ public class JenkinsJobTest {
 	public void testCompare3() {
 		JenkinsJob successJob = new JenkinsJob(
 			"successJobName", "successJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob failedJob = new JenkinsJob(
 			"failedJobName", "failedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(failedJob, successJob);
 
@@ -93,15 +99,18 @@ public class JenkinsJobTest {
 	public void testCompare4() {
 		JenkinsJob successJob = new JenkinsJob(
 			"successJobName", "successJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob unstableJob = new JenkinsJob(
 			"unstableJobName", "unstableJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE,
+			_BUILD_URL);
 
 		JenkinsJob failedJob = new JenkinsJob(
 			"failedJobName", "failedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(failedJob, successJob, unstableJob);
 
@@ -120,19 +129,23 @@ public class JenkinsJobTest {
 	public void testCompare5() {
 		JenkinsJob successJob = new JenkinsJob(
 			"successJobName", "successJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob abortedJob = new JenkinsJob(
 			"abortedJobName", "abortedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_ABORTED,
+			_BUILD_URL);
 
 		JenkinsJob unstableJob = new JenkinsJob(
 			"unstableJobName", "unstableJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE,
+			_BUILD_URL);
 
 		JenkinsJob failedJob = new JenkinsJob(
 			"failedJobName", "failedJob",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_FAILURE,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(
 			successJob, abortedJob, unstableJob, failedJob);
@@ -155,11 +168,13 @@ public class JenkinsJobTest {
 	public void testCompare6() {
 		JenkinsJob successJob1 = new JenkinsJob(
 			"successJobName1", "successJob1",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob successJob2 = new JenkinsJob(
 			"successJobName2", "successJob2",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(successJob1, successJob2);
 
@@ -171,11 +186,13 @@ public class JenkinsJobTest {
 	public void testCompare7() {
 		JenkinsJob successJob1 = new JenkinsJob(
 			"successJobName1", "successJob1",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob successJob2 = new JenkinsJob(
 			"successJobName2", "successJob2",
-			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS);
+			JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_SUCCESS,
+			_BUILD_URL);
 
 		JenkinsJob[] sortedJobs = sort(successJob2, successJob1);
 
@@ -188,5 +205,7 @@ public class JenkinsJobTest {
 
 		return jobs;
 	}
+
+	private static final String _BUILD_URL = "http://www.google.es";
 
 }
