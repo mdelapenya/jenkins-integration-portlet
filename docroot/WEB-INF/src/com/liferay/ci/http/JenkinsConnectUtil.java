@@ -140,16 +140,18 @@ public class JenkinsConnectUtil {
 
 			JenkinsBuild lastBuild = getLastBuild(connectionParams, jobName);
 
+			String lastBuildUrl = lastBuild.getUrl().toString();
+
 			if (lastBuild.getStatus().equals(
 				JenkinsIntegrationConstants.JENKINS_BUILD_STATUS_UNSTABLE)) {
 
 				result[i] = new JenkinsUnstableJob(
-					jobName, jobAlias, lastBuild.getStatus(),
+					jobName, jobAlias, lastBuild.getStatus(), lastBuildUrl,
 					lastBuild.getFailedTests());
 			}
 			else {
 				result[i] = new JenkinsJob(
-					jobName, jobAlias, lastBuild.getStatus());
+					jobName, jobAlias, lastBuild.getStatus(), lastBuildUrl);
 			}
 		}
 

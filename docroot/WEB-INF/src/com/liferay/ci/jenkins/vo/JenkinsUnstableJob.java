@@ -17,16 +17,16 @@ package com.liferay.ci.jenkins.vo;
 public class JenkinsUnstableJob extends JenkinsJob {
 
 	public JenkinsUnstableJob(
-		String jobName, String alias, String lastBuildStatus) {
+		String jobName, String alias, String lastBuildStatus, String buildUrl) {
 
-		this(jobName, alias, lastBuildStatus, 0);
+		this(jobName, alias, lastBuildStatus, buildUrl, 0);
 	}
 
 	public JenkinsUnstableJob(
-		String jobName, String alias, String lastBuildStatus,
+		String jobName, String alias, String lastBuildStatus, String buildUrl,
 		int failedTestCount) {
 
-		super(jobName, alias, lastBuildStatus);
+		super(jobName, alias, lastBuildStatus, buildUrl);
 
 		this.failedTestCount = failedTestCount;
 	}
