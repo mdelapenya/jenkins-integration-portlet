@@ -31,7 +31,9 @@ for (JenkinsJob jenkinsJob : jenkinsJobs) {
 %>
 	<div class="job-wrapper row-fluid">
 		<div class="job-name span7 text-left">
-			<%= jenkinsJob.getJobAlias() %>
+			<a href="<%= jenkinsJob.getBuildUrl() %>">
+				<%= jenkinsJob.getJobAlias() %>
+			</a>
 		</div>
 		<div class="job-status <%= jenkinsJob.getLastBuildStatus().toLowerCase() %> span5 text-center">
 			<%= status %>
